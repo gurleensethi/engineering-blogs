@@ -7,14 +7,21 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Post {
-  uniqueName   String   @id
-  displayName  String
-  title        String
-  desceription String?
-  pubDate      DateTime
+model Publication {
+  id           String @id
+  name         String
+  blogName     String
+  desecription String
   link         String
-  guid         String
-  pubName      String
-  pubLink      String
+  posts        Post[]
+}
+
+model Post {
+  guid          String      @id
+  title         String
+  desceription  String?
+  pubDate       DateTime
+  link          String
+  publicationId String
+  publication   Publication @relation(fields: [publicationId], references: [id])
 }
