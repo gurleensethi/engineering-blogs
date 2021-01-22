@@ -2,6 +2,9 @@ import { IsNotEmpty, IsOptional } from 'class-validator';
 
 export class CreatePostDto {
   @IsNotEmpty()
+  postId: string;
+
+  @IsNotEmpty()
   title: string;
 
   @IsOptional()

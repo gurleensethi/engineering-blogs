@@ -1,15 +1,17 @@
+import { Post } from '@prisma/client';
+
 function extractCommonFieldsFromRSS({
   title,
   description,
   guid,
   pubDate,
   link,
-}: any) {
+}: any): Omit<Post, 'postId' | 'publicationId'> {
   return {
+    guid,
     title,
     description,
-    guid,
-    pubDate,
+    pubDate: new Date(pubDate),
     link,
   };
 }
@@ -19,7 +21,7 @@ export interface BlogSource {
   link: string;
   description: string;
   feedUrl: string;
-  mapper: (arg: any) => any;
+  mapper: (arg: any) => Omit<Post, 'postId' | 'publicationId'>;
   [key: string]: any;
 }
 

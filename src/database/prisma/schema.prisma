@@ -8,18 +8,19 @@ generator client {
 }
 
 model Publication {
-  id           String @id
-  name         String
-  blogName     String
-  desecription String
-  link         String
-  posts        Post[]
+  id          String @id
+  name        String
+  blogName    String
+  description String
+  link        String
+  posts       Post[]
 }
 
 model Post {
-  guid          String      @id
+  postId        String      @id
+  guid          String
   title         String
-  desceription  String?
+  description   String?
   pubDate       DateTime
   link          String
   publicationId String

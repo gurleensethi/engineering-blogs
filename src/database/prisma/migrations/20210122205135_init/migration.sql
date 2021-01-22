@@ -3,7 +3,7 @@ CREATE TABLE "Publication" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "blogName" TEXT NOT NULL,
-    "desecription" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
     "link" TEXT NOT NULL,
 
     PRIMARY KEY ("id")
@@ -11,15 +11,15 @@ CREATE TABLE "Publication" (
 
 -- CreateTable
 CREATE TABLE "Post" (
+    "postId" TEXT NOT NULL,
     "guid" TEXT NOT NULL,
-    "displayName" TEXT NOT NULL,
     "title" TEXT NOT NULL,
-    "desceription" TEXT,
+    "description" TEXT,
     "pubDate" TIMESTAMP(3) NOT NULL,
     "link" TEXT NOT NULL,
     "publicationId" TEXT NOT NULL,
 
-    PRIMARY KEY ("guid")
+    PRIMARY KEY ("postId")
 );
 
 -- AddForeignKey

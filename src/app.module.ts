@@ -4,6 +4,7 @@ import { PostModule } from './post/post.module';
 import { DatabaseModule } from './database/database.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { SyncModule } from './sync/sync.module';
+import { PublicationModule } from './publication/publication.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { SyncModule } from './sync/sync.module';
     DatabaseModule,
     PostModule,
     SyncModule,
+    PublicationModule,
   ],
   controllers: [],
   providers: [],

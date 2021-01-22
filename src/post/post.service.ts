@@ -13,7 +13,7 @@ export class PostService {
 
   public async createPost(createPostDto: CreatePostDto): Promise<Post> {
     const existingPost = await this.prismaService.post.findUnique({
-      where: { guid: createPostDto.guid },
+      where: { postId: createPostDto.postId },
     });
 
     if (existingPost) {
@@ -23,5 +23,17 @@ export class PostService {
     }
 
     return this.prismaService.post.create({ data: createPostDto });
+  }
+
+  public async createManyPosts(posts: Post[]): Promise<void> {
+    await this.prismaService.$transaction(
+      posts.map((post) => {
+        return this.prismaService.post.upsert({
+          create: post,
+          update: post,
+          where: { postId: post.postId },
+        });
+      }),
+    );
   }
 }
