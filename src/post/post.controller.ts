@@ -1,4 +1,4 @@
-import { Controller, Get, ParseIntPipe, Query } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { Post } from '@prisma/client';
 import { PaginatedResult } from 'src/types';
 import { GetPostsQueryDto } from './dto/get-posts-query.dto';
