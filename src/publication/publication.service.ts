@@ -6,6 +6,10 @@ import { PrismaService } from 'src/database/prisma.service';
 export class PublicationService {
   constructor(private prismaService: PrismaService) {}
 
+  public async getAllPublications(): Promise<Publication[]> {
+    return this.prismaService.publication.findMany();
+  }
+
   public async getPublication(id: string): Promise<Publication | undefined> {
     return this.prismaService.publication.findUnique({ where: { id } });
   }
