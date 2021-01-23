@@ -1,7 +1,9 @@
-import { IsInt, IsNumberString, IsOptional } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsInt, IsOptional } from 'class-validator';
 
 export class GetPostsQueryDto {
-  @IsNumberString({ no_symbols: true })
+  @Type(() => Number)
+  @IsInt()
   @IsOptional()
   page = 0;
 }
