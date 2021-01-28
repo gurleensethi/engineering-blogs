@@ -25,8 +25,6 @@ export class PostService {
       include: { publication: true },
     };
 
-    console.log(publicationIds);
-
     if (publicationIds) {
       queryOptions.where = {
         publicationId: {
