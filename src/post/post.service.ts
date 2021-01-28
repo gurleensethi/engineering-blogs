@@ -1,5 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { Post } from '@prisma/client';
+import { Post, Prisma } from '@prisma/client';
 import { PrismaService } from 'src/database/prisma.service';
 import { PaginatedResult } from 'src/types';
 import { CreatePostDto } from './dto/create-post.dto';
@@ -10,17 +10,32 @@ const POST_PAGE_SIZE = 15;
 export class PostService {
   constructor(private prismaService: PrismaService) {}
 
-  public async getPosts(pageNumber: number): Promise<PaginatedResult<Post>> {
+  public async getPosts(
+    pageNumber: number,
+    publicationIds?: string,
+  ): Promise<PaginatedResult<Post>> {
     const itemsToSkip = pageNumber * POST_PAGE_SIZE;
 
-    const results = await this.prismaService.post.findMany({
+    const queryOptions: Prisma.PostFindManyArgs = {
       skip: itemsToSkip,
       take: POST_PAGE_SIZE,
       orderBy: {
         pubDate: 'desc',
       },
       include: { publication: true },
-    });
+    };
+
+    console.log(publicationIds);
+
+    if (publicationIds) {
+      queryOptions.where = {
+        publicationId: {
+          in: publicationIds.split(','),
+        },
+      };
+    }
+
+    const results = await this.prismaService.post.findMany(queryOptions);
 
     return {
       pageNumber,
