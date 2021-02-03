@@ -20,11 +20,10 @@ const getPubIdsAsQuery = (ids?: string): string => {
 const Index: React.FC<Props> = ({ posts, pageNumber, publicationIds }) => {
   return (
     <div className="h-screen px-8 py-8 flex flex-col items-center">
-      <ul className="inline-flex flex-wrap justify-between w-10/12 ">
+      <ul className="inline-flex flex-wrap justify-between w-full sm:w-10/12">
         {posts.map((item) => (
           <li
-            className="ring-1 ring-gray-200 rounded-md m-2 transition hover:shadow-xl cursor-pointer"
-            style={{ width: "47%" }}
+            className="ring-1 ring-gray-200 rounded-md mb-8 transition hover:shadow-xl cursor-pointer w-full sm:w-custom/48"
             key={item.guid}
           >
             <a href={item.link} target="_blank">
