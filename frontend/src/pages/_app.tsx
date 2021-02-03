@@ -6,7 +6,7 @@ import React from "react";
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <React.StrictMode>
-      <div className="bg-white h-screen overflow-scroll">
+      <div className="bg-white h-screen">
         <div className="fixed">
           <TopBar />
         </div>

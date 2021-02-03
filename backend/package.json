@@ -21,9 +21,10 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "heroku:push": "heroku container:push web",
-    "heroku:release": "heroku container:release web",
-    "heroku:deploy": "npm run heroku:push && npm run heroku:release"
+    "heroku:docker:build": "docker build -t registry.heroku.com/engineering-blogs-nest/web .",
+    "heroku:push": "docker push registry.heroku.com/engineering-blogs-nest/web",
+    "heroku:release": "heroku container:release web --app engineering-blogs-nest",
+    "heroku:deploy": "npm run heroku:docker:build && npm run heroku:push && npm run heroku:release"
   },
   "dependencies": {
     "@nestjs/common": "^7.6.5",
@@ -36,6 +37,7 @@
     "class-transformer": "^0.3.2",
     "class-validator": "^0.13.1",
     "fast-xml-parser": "^3.17.6",
+    "html-to-text": "^6.0.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^6.6.3"
@@ -47,6 +49,7 @@
     "@prisma/cli": "^2.15.0",
     "@types/cron": "^1.7.2",
     "@types/express": "^4.17.11",
+    "@types/html-to-text": "^6.0.0",
     "@types/jest": "^26.0.20",
     "@types/node": "^14.14.22",
     "@types/supertest": "^2.0.10",

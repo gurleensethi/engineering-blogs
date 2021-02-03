@@ -4,6 +4,7 @@ import { getAllPosts } from "../api-client/posts";
 import { Post } from "../types";
 import Link from "next/link";
 import { shortenText } from "../common/utils";
+import { useRouter } from "next/router";
 
 type Props = {
   posts: Post[];
@@ -18,6 +19,12 @@ const getPubIdsAsQuery = (ids?: string): string => {
 };
 
 const Index: React.FC<Props> = ({ posts, pageNumber, publicationIds }) => {
+  const router = useRouter();
+
+  const handlePublicationClick = (id: string): void => {
+    router.push(`/?publicationIds=${id}`);
+  };
+
   return (
     <div className="h-screen px-8 py-8 flex flex-col items-center">
       <ul className="inline-flex flex-wrap justify-between w-full sm:w-10/12">
@@ -29,7 +36,14 @@ const Index: React.FC<Props> = ({ posts, pageNumber, publicationIds }) => {
             <a href={item.link} target="_blank">
               <div className="p-4">
                 <div className="flex">
-                  <div className="text-blue-500 bg-blue-100 shadow-sm px-2 py-1 text-xs rounded mb-2">
+                  <div
+                    className="text-blue-500 bg-blue-100 shadow-sm px-2 py-1 text-xs rounded mb-2"
+                    onClick={(event) => {
+                      event.preventDefault();
+                      event.stopPropagation();
+                      handlePublicationClick(item.publicationId);
+                    }}
+                  >
                     {item.publication.name}
                   </div>
                 </div>
@@ -54,6 +68,7 @@ const Index: React.FC<Props> = ({ posts, pageNumber, publicationIds }) => {
         )}
         <Link
           href={`/?page=${pageNumber + 1}${getPubIdsAsQuery(publicationIds)}`}
+          scroll
         >
           <a className="text-blue-500 ml-auto">Next</a>
         </Link>

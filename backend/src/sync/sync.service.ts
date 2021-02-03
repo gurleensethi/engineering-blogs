@@ -6,6 +6,7 @@ import * as xmlParser from 'fast-xml-parser';
 import axios from 'axios';
 import { Post, Publication } from '@prisma/client';
 import { PublicationService } from 'src/publication/publication.service';
+import { htmlToText } from 'html-to-text';
 
 @Injectable({ scope: Scope.DEFAULT })
 export class SyncService {
@@ -34,7 +35,10 @@ export class SyncService {
         description: channel.description,
         link: channel.link,
       },
-      items: channel.item,
+      items: channel.item.map((item) => ({
+        ...item,
+        description: htmlToText(item.description),
+      })),
     };
   }
 
