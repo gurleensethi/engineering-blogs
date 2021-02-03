@@ -3,26 +3,62 @@ import React from "react";
 import { getAllPosts } from "../api-client/posts";
 import { Post } from "../types";
 import Link from "next/link";
+import { shortenText } from "../common/utils";
 
-type Props = { posts: Post[]; hasNextPage: boolean; pageNumber: number };
-type Query = { page?: string };
+type Props = {
+  posts: Post[];
+  hasNextPage: boolean;
+  pageNumber: number;
+  publicationIds: string;
+};
+type Query = { page?: string; publicationIds?: string };
 
-const Index: React.FC<Props> = ({ posts, pageNumber }) => {
+const getPubIdsAsQuery = (ids?: string): string => {
+  return !!ids ? `&publicationIds=${ids}` : "";
+};
+
+const Index: React.FC<Props> = ({ posts, pageNumber, publicationIds }) => {
   return (
-    <div>
-      <ul>
+    <div className="h-screen px-8 py-8 flex flex-col items-center">
+      <ul className="inline-flex flex-wrap justify-between w-10/12 ">
         {posts.map((item) => (
-          <li key={item.guid}>{item.title}</li>
+          <li
+            className="ring-1 ring-gray-200 rounded-md m-2 transition hover:shadow-xl cursor-pointer"
+            style={{ width: "47%" }}
+            key={item.guid}
+          >
+            <a href={item.link} target="_blank">
+              <div className="p-4">
+                <div className="flex">
+                  <div className="text-blue-500 bg-blue-100 shadow-sm px-2 py-1 text-xs rounded mb-2">
+                    {item.publication.name}
+                  </div>
+                </div>
+                <div className="mb-2 text-lg text-gray-700 font-medium">
+                  {item.title}
+                </div>
+                <div className="mb-2 text-sm text-gray-500">
+                  {shortenText(item.description)}
+                </div>
+              </div>
+            </a>
+          </li>
         ))}
       </ul>
-      {pageNumber > 0 && (
-        <Link href={`/?page=${pageNumber - 1}`}>
-          <a>Prev</a>
+      <div className="p-6 flex w-full">
+        {pageNumber > 0 && (
+          <Link
+            href={`/?page=${pageNumber - 1}${getPubIdsAsQuery(publicationIds)}`}
+          >
+            <a className="text-blue-500">Prev</a>
+          </Link>
+        )}
+        <Link
+          href={`/?page=${pageNumber + 1}${getPubIdsAsQuery(publicationIds)}`}
+        >
+          <a className="text-blue-500 ml-auto">Next</a>
         </Link>
-      )}
-      <Link href={`/?page=${pageNumber + 1}`}>
-        <a>Next</a>
-      </Link>
+      </div>
     </div>
   );
 };
@@ -33,23 +69,28 @@ export const getServerSideProps: GetServerSideProps<Props, Query> = async ({
   query,
 }) => {
   let page: number = parseInt((query?.page as string) || "0");
+  let publicationIds = query?.publicationIds as string;
 
   if (page < 0) {
     return {
       redirect: {
-        destination: "/?page=0",
+        destination: "/",
         permanent: true,
       },
     };
   }
 
-  const { data: posts, pageNumber, hasNextPage } = await getAllPosts(page);
+  const { data: posts, pageNumber, hasNextPage } = await getAllPosts({
+    page,
+    publicationIds,
+  });
 
   return {
     props: {
       posts,
       hasNextPage,
       pageNumber,
+      publicationIds: publicationIds || "",
     },
   };
 };
