@@ -5,6 +5,7 @@ import { Post } from "../types";
 import Link from "next/link";
 import { shortenText } from "../common/utils";
 import { useRouter } from "next/router";
+import { format } from "date-fns";
 
 type Props = {
   posts: Post[];
@@ -55,11 +56,15 @@ const Index: React.FC<Props> = ({
               className="ring-1 ring-gray-200 rounded-md mb-8 transition hover:shadow-xl cursor-pointer w-full sm:w-custom/48"
               key={item.guid}
             >
-              <a href={item.link} target="_blank">
-                <div className="p-4">
-                  <div className="flex">
+              <a
+                className="h-full outline-none"
+                href={item.link}
+                target="_blank"
+              >
+                <div className="p-4 flex flex-col h-full">
+                  <div className="flex w-full mb-2 align-middle">
                     <div
-                      className={`${flairColor} font-semibold tracking-wide px-2 py-1 text-xs rounded mb-2`}
+                      className={`${flairColor} font-semibold tracking-wide px-2 py-1 text-xs rounded`}
                       onClick={(event) => {
                         event.preventDefault();
                         event.stopPropagation();
@@ -67,6 +72,9 @@ const Index: React.FC<Props> = ({
                       }}
                     >
                       {item.publication.name}
+                    </div>
+                    <div className="text-xs text-gray-500 flex-1 text-right">
+                      {format(new Date(item.pubDate), "dd-MMM-yyyy")}
                     </div>
                   </div>
                   <div className="mb-2 text-lg text-gray-700 font-medium">
