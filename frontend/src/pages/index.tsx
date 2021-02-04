@@ -94,7 +94,7 @@ const Index: React.FC<Props> = ({
           <Link
             href={`/?page=${pageNumber - 1}${getPubIdsAsQuery(publicationIds)}`}
           >
-            <a className="text-blue-500">Prev</a>
+            <a className="outline-none text-blue-500">Prev</a>
           </Link>
         )}
         {hasNextPage && (
@@ -102,7 +102,7 @@ const Index: React.FC<Props> = ({
             href={`/?page=${pageNumber + 1}${getPubIdsAsQuery(publicationIds)}`}
             scroll
           >
-            <a className="text-blue-500 ml-auto">Next</a>
+            <a className="outline-none text-blue-500 ml-auto">Next</a>
           </Link>
         )}
       </div>
