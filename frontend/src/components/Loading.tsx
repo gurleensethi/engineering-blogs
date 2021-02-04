@@ -9,7 +9,7 @@ const Loading: React.FC<Props> = ({ isLoading }) => {
   useEffect(() => {
     const loadProgress = () => {
       setWidth((w) => {
-        return Math.min(w + 0.25, 90);
+        return Math.min(w + 0.75, 90);
       });
     };
 
