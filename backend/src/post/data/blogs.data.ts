@@ -91,4 +91,100 @@ export default <{ [key: string]: BlogSource }>{
       };
     },
   },
+  cloudflare: {
+    name: 'Cloudflare',
+    link: 'https://blog.cloudflare.com/',
+    description: 'The Cloudflare Blog',
+    feedUrl: 'https://blog.cloudflare.com/rss/',
+    isPaged: false,
+    mapper: (rawJson: any) => {
+      return {
+        ...extractCommonFieldsFromRSS(rawJson),
+      };
+    },
+  },
+  dropboxApplication: {
+    name: 'Dropbox - Application',
+    link: 'https://dropbox.tech/application',
+    description: 'Dropbox Tech',
+    feedUrl: 'https://dropbox.tech/application/feed',
+    isPaged: false,
+    mapper: (rawJson: any) => {
+      return {
+        ...extractCommonFieldsFromRSS(rawJson),
+      };
+    },
+  },
+  dropboxFrontend: {
+    name: 'Dropbox - Frontend',
+    link: 'https://dropbox.tech/frontend',
+    description: 'Dropbox Tech',
+    feedUrl: 'https://dropbox.tech/frontend/feed',
+    isPaged: false,
+    mapper: (rawJson: any) => {
+      return {
+        ...extractCommonFieldsFromRSS(rawJson),
+      };
+    },
+  },
+  dropboxInfrastructure: {
+    name: 'Dropbox - Infrastructure',
+    link: 'https://dropbox.tech/infrastructure',
+    description: 'Dropbox Tech',
+    feedUrl: 'https://dropbox.tech/infrastructure/feed',
+    isPaged: false,
+    mapper: (rawJson: any) => {
+      return {
+        ...extractCommonFieldsFromRSS(rawJson),
+      };
+    },
+  },
+  dropboxMachineLearning: {
+    name: 'Dropbox - Machine Learning',
+    link: 'https://dropbox.tech/machine-learning',
+    description: 'Dropbox Tech',
+    feedUrl: 'https://dropbox.tech/machine-learning/feed',
+    isPaged: false,
+    mapper: (rawJson: any) => {
+      return {
+        ...extractCommonFieldsFromRSS(rawJson),
+      };
+    },
+  },
+  dropboxMobile: {
+    name: 'Dropbox - Mobile',
+    link: 'https://dropbox.tech/mobile',
+    description: 'Dropbox Tech',
+    feedUrl: 'https://dropbox.tech/mobile/feed',
+    isPaged: false,
+    mapper: (rawJson: any) => {
+      return {
+        ...extractCommonFieldsFromRSS(rawJson),
+      };
+    },
+  },
+  dropboxSecurity: {
+    name: 'Dropbox - Security',
+    link: 'https://dropbox.tech/security',
+    description: 'Dropbox Tech',
+    feedUrl: 'https://dropbox.tech/security/feed',
+    isPaged: false,
+    mapper: (rawJson: any) => {
+      return {
+        ...extractCommonFieldsFromRSS(rawJson),
+      };
+    },
+  },
+  doordash: {
+    name: 'DoorDash',
+    link: 'https://doordash.engineering',
+    description: 'DoorDash Engineering Blog',
+    feedUrl: 'https://doordash.engineering/feed',
+    isPaged: false,
+    mapper: (rawJson: any) => {
+      return {
+        ...extractCommonFieldsFromRSS(rawJson),
+      };
+    },
+  },
 };

@@ -4,7 +4,7 @@ import { PrismaService } from 'src/database/prisma.service';
 import { PaginatedResult } from 'src/types';
 import { CreatePostDto } from './dto/create-post.dto';
 
-const POST_PAGE_SIZE = 15;
+const POST_PAGE_SIZE = 20;
 
 @Injectable()
 export class PostService {
