@@ -18,7 +18,26 @@ const getPubIdsAsQuery = (ids?: string): string => {
   return !!ids ? `&publicationIds=${ids}` : "";
 };
 
-const Index: React.FC<Props> = ({ posts, pageNumber, publicationIds }) => {
+const flairColors = [
+  "text-red-500 bg-red-100",
+  "text-blue-500 bg-blue-100",
+  "text-green-500 bg-green-100",
+  "text-teal-500 bg-teal-100",
+  "text-orange-500 bg-orange-100",
+  "text-indigo-500 bg-indigo-100",
+  "text-violet-500 bg-violet-100",
+];
+
+export const getFlairColor = (id: string): string => {
+  return flairColors[id.charCodeAt(0) % flairColors.length];
+};
+
+const Index: React.FC<Props> = ({
+  posts,
+  pageNumber,
+  publicationIds,
+  hasNextPage,
+}) => {
   const router = useRouter();
 
   const handlePublicationClick = (id: string): void => {
@@ -28,35 +47,39 @@ const Index: React.FC<Props> = ({ posts, pageNumber, publicationIds }) => {
   return (
     <div className="h-screen px-8 py-8 flex flex-col items-center">
       <ul className="inline-flex flex-wrap justify-between w-full sm:w-10/12">
-        {posts.map((item) => (
-          <li
-            className="ring-1 ring-gray-200 rounded-md mb-8 transition hover:shadow-xl cursor-pointer w-full sm:w-custom/48"
-            key={item.guid}
-          >
-            <a href={item.link} target="_blank">
-              <div className="p-4">
-                <div className="flex">
-                  <div
-                    className="text-blue-500 bg-blue-100 shadow-sm px-2 py-1 text-xs rounded mb-2"
-                    onClick={(event) => {
-                      event.preventDefault();
-                      event.stopPropagation();
-                      handlePublicationClick(item.publicationId);
-                    }}
-                  >
-                    {item.publication.name}
+        {posts.map((item) => {
+          const flairColor = getFlairColor(item.publicationId);
+
+          return (
+            <li
+              className="ring-1 ring-gray-200 rounded-md mb-8 transition hover:shadow-xl cursor-pointer w-full sm:w-custom/48"
+              key={item.guid}
+            >
+              <a href={item.link} target="_blank">
+                <div className="p-4">
+                  <div className="flex">
+                    <div
+                      className={`${flairColor} font-semibold tracking-wide px-2 py-1 text-xs rounded mb-2`}
+                      onClick={(event) => {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        handlePublicationClick(item.publicationId);
+                      }}
+                    >
+                      {item.publication.name}
+                    </div>
+                  </div>
+                  <div className="mb-2 text-lg text-gray-700 font-medium">
+                    {item.title}
+                  </div>
+                  <div className="mb-2 text-sm text-gray-500">
+                    {shortenText(item.description)}
                   </div>
                 </div>
-                <div className="mb-2 text-lg text-gray-700 font-medium">
-                  {item.title}
-                </div>
-                <div className="mb-2 text-sm text-gray-500">
-                  {shortenText(item.description)}
-                </div>
-              </div>
-            </a>
-          </li>
-        ))}
+              </a>
+            </li>
+          );
+        })}
       </ul>
       <div className="p-6 flex w-full">
         {pageNumber > 0 && (
@@ -66,12 +89,14 @@ const Index: React.FC<Props> = ({ posts, pageNumber, publicationIds }) => {
             <a className="text-blue-500">Prev</a>
           </Link>
         )}
-        <Link
-          href={`/?page=${pageNumber + 1}${getPubIdsAsQuery(publicationIds)}`}
-          scroll
-        >
-          <a className="text-blue-500 ml-auto">Next</a>
-        </Link>
+        {hasNextPage && (
+          <Link
+            href={`/?page=${pageNumber + 1}${getPubIdsAsQuery(publicationIds)}`}
+            scroll
+          >
+            <a className="text-blue-500 ml-auto">Next</a>
+          </Link>
+        )}
       </div>
     </div>
   );
