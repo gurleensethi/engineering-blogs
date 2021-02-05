@@ -5,7 +5,7 @@ import TopBarLink from "./TopBarLink";
 
 export default function TopBar() {
   const router = useRouter();
-  const [isDropDownOpen, setDropDownOpen] = React.useState(true);
+  const [isDropDownOpen, setDropDownOpen] = React.useState(false);
 
   const toggleDropDown = () => {
     setDropDownOpen((value) => !value);
@@ -48,6 +48,13 @@ export default function TopBar() {
               href="/publications"
               isActive={router.pathname === "/publications"}
               title="Publications"
+              className="m-2 mb-4 block sm:m-0 sm:mr-8"
+              onClick={() => setDropDownOpen(false)}
+            />
+            <TopBarLink
+              href="/about"
+              isActive={router.pathname === "/about"}
+              title="About"
               className="m-2 block sm:m-0"
               onClick={() => setDropDownOpen(false)}
             />

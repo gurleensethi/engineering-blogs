@@ -46,7 +46,7 @@ const Index: React.FC<Props> = ({
   };
 
   return (
-    <div className="h-screen px-8 py-8 flex flex-col items-center">
+    <div className="h-screen flex flex-col items-center">
       <ul className="inline-flex flex-wrap justify-between w-full sm:w-10/12">
         {posts.map((item) => {
           const flairColor = getFlairColor(item.publicationId);
