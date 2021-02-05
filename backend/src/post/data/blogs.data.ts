@@ -35,7 +35,10 @@ export default <{ [key: string]: BlogSource }>{
     link: 'https://eng.uber.com/',
     description: 'https://eng.uber.com/',
     feedUrl: 'https://eng.uber.com/feed/',
-    isPaged: false,
+    isPaged: true,
+    getNextPage: (page) => page + 1,
+    getNextPageLink: (pageNum) =>
+      `https://eng.uber.com/feed?paged=${pageNum + 1}`,
     mapper: (rawJson: any) => {
       return {
         ...extractCommonFieldsFromRSS(rawJson),

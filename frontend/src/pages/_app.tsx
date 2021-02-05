@@ -11,15 +11,12 @@ export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     const onRouteChangeStart = () => {
       setLoading(true);
-      console.log("onRouteChangeStart");
     };
     const onRouteChangeComplete = () => {
       setLoading(false);
-      console.log("onRouteChangeComplete");
     };
     const onRouteChangeError = () => {
       setLoading(false);
-      console.log("onRouteChangeError");
     };
 
     Router.events.on("routeChangeStart", onRouteChangeStart);
