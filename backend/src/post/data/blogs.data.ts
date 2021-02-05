@@ -26,6 +26,7 @@ export interface BlogSource {
   isPaged: boolean;
   startPage?: number;
   getNextPage?: (currentPage: number) => number;
+  getNextPageLink?: (currentPage: number) => string;
 }
 
 export default <{ [key: string]: BlogSource }>{
@@ -180,7 +181,25 @@ export default <{ [key: string]: BlogSource }>{
     link: 'https://doordash.engineering',
     description: 'DoorDash Engineering Blog',
     feedUrl: 'https://doordash.engineering/feed',
-    isPaged: false,
+    isPaged: true,
+    getNextPage: (page) => page + 1,
+    getNextPageLink: (pageNumber) =>
+      `https://doordash.engineering/feed?paged=${pageNumber + 1}`,
+    mapper: (rawJson: any) => {
+      return {
+        ...extractCommonFieldsFromRSS(rawJson),
+      };
+    },
+  },
+  github: {
+    name: 'GitHub',
+    link: 'https://github.bloc',
+    description: 'GitHub Blog',
+    feedUrl: 'https://github.blog/feed',
+    isPaged: true,
+    getNextPage: (page) => page + 1,
+    getNextPageLink: (pageNumber) =>
+      `https://github.blog/feed?paged=${pageNumber + 1}`,
     mapper: (rawJson: any) => {
       return {
         ...extractCommonFieldsFromRSS(rawJson),
