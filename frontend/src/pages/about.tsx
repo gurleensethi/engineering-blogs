@@ -31,6 +31,8 @@ const About: FC = () => {
           <a
             className="text-blue-500 underline hover:text-blue-700"
             href="https://github.com/kilimchoi/engineering-blogs"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             kilimchoi/engineering-blogs
           </a>

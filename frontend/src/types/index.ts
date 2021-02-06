@@ -20,3 +20,11 @@ export interface PaginatedResult<T> {
   data: T[];
   pageNumber: number;
 }
+
+export interface Publication {
+  id: string;
+  name: string;
+  blogName: string;
+  description: string;
+  link: string;
+}

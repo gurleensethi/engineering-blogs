@@ -29,7 +29,7 @@ const flairColors = [
   "text-violet-500 bg-violet-100",
 ];
 
-export const getFlairColor = (id: string): string => {
+const getFlairColor = (id: string): string => {
   return flairColors[id.charCodeAt(0) % flairColors.length];
 };
 
@@ -46,8 +46,8 @@ const Index: React.FC<Props> = ({
   };
 
   return (
-    <div className="h-screen flex flex-col items-center">
-      <ul className="inline-flex flex-wrap justify-between w-full sm:w-10/12">
+    <div className="h-screen flex flex-col items-center sm:max-w-screen-lg m-auto">
+      <ul className="inline-flex flex-wrap justify-between">
         {posts.map((item) => {
           const flairColor = getFlairColor(item.publicationId);
 
@@ -60,6 +60,7 @@ const Index: React.FC<Props> = ({
                 className="h-full outline-none"
                 href={item.link}
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 <div className="p-4 flex flex-col h-full">
                   <div className="flex w-full mb-2 align-middle">
