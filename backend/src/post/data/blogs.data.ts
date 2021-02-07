@@ -209,4 +209,19 @@ export default <{ [key: string]: BlogSource }>{
       };
     },
   },
+  slack: {
+    name: 'Slack',
+    link: 'https://slack.engineering',
+    description: 'Slack Engineering Blog',
+    feedUrl: 'https://slack.engineering/feed',
+    isPaged: true,
+    getNextPage: (page) => page + 1,
+    getNextPageLink: (pageNumber) =>
+      `https://slack.engineering/feed?paged=${pageNumber + 1}`,
+    mapper: (rawJson: any) => {
+      return {
+        ...extractCommonFieldsFromRSS(rawJson),
+      };
+    },
+  },
 };

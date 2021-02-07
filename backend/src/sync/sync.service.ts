@@ -1,6 +1,6 @@
 import { Injectable, Logger, Scope } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
-import blogsData from 'src/post/data/blogs.data';
+import blogsData, { BlogSource } from 'src/post/data/blogs.data';
 import { PostService } from 'src/post/post.service';
 import * as xmlParser from 'fast-xml-parser';
 import axios from 'axios';
@@ -48,6 +48,27 @@ export class SyncService {
     return xmlParser.parse(data);
   }
 
+  private normalizePublication(
+    publication: Pick<Publication, 'blogName' | 'description' | 'link'>,
+    blog: BlogSource,
+  ): Pick<Publication, 'blogName' | 'description' | 'link'> {
+    const result = { ...publication };
+
+    if (!result.description) {
+      result.description = blog.description;
+    }
+
+    if (!result.blogName) {
+      result.blogName = blog.name;
+    }
+
+    if (!result.link) {
+      result.link = blog.link;
+    }
+
+    return result;
+  }
+
   @Cron(CronExpression.EVERY_12_HOURS)
   public async syncPosts(): Promise<void> {
     for (const blogKey of Object.keys(blogsData)) {
@@ -66,7 +87,7 @@ export class SyncService {
           );
 
           pub = await this.publicationService.createPublication({
-            ...publication,
+            ...this.normalizePublication(publication, blog),
             id: blogKey,
             name: blog.name,
           });
