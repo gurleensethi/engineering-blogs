@@ -46,7 +46,7 @@ const Publications: FC<Props> = ({ publications }) => {
 
   return (
     <div className="sm:max-w-screen-lg sm:m-auto">
-      <div className="flex transition w-full rounded-md border border-gray-200 mb-8 p-2 focus:border-gray-400 focus:shadow">
+      <div className="flex transition w-full rounded-md border border-gray-200 mb-8 p-2 focus-within:border-gray-400 focus-within:shadow">
         <input
           className="outline-none text-lg text-gray-500 flex-1"
           placeholder="Search"
