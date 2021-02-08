@@ -8,7 +8,7 @@ type Props = {
 
 const Search: FC<Props> = ({ onTextChange, onTextReset, text }) => {
   return (
-    <div className="flex transition w-full rounded-md border border-gray-200 mb-8 p-2 focus-within:border-gray-400 focus-within:shadow">
+    <div className="flex items-center transition w-full rounded-md border border-gray-200 mb-8 p-2 focus-within:border-gray-400 focus-within:shadow">
       <input
         className="outline-none text-lg text-gray-500 flex-1"
         placeholder="Search"

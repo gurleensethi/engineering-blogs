@@ -7,6 +7,7 @@ import { shortenText } from "../common/utils";
 import { useRouter } from "next/router";
 import { format } from "date-fns";
 import Search from "../components/Search";
+import useDebounce from "../hooks/useDebounce";
 
 type Props = {
   posts: Post[];
@@ -42,9 +43,9 @@ const Index: React.FC<Props> = ({
   hasNextPage,
   search,
 }) => {
-  const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [searchText, setSearchText] = useState(search || "");
   const router = useRouter();
+  const [searchDebounce] = useDebounce(500);
 
   const fetchPosts = (value: string) => {
     router.push({ href: "/", query: { ...router.query, search: value } });
@@ -56,12 +57,12 @@ const Index: React.FC<Props> = ({
 
   const handleSearchChange = (value: string) => {
     setSearchText(value);
-    clearInterval(searchTimeoutRef.current);
-    searchTimeoutRef.current = setTimeout(() => fetchPosts(value), 300);
+    searchDebounce(() => fetchPosts(value));
   };
 
   const onSearchReset = () => {
     setSearchText("");
+    fetchPosts("");
   };
 
   return (
