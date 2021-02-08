@@ -16,7 +16,7 @@ export class SyncService {
     private postService: PostService,
     private publicationService: PublicationService,
   ) {
-    // this.syncPosts();
+    this.syncPosts();
   }
 
   public async extractDataFromRSS(
