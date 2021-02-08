@@ -13,6 +13,7 @@ export class PostService {
   public async getPosts(
     pageNumber: number,
     publicationIds?: string,
+    search?: string,
   ): Promise<PaginatedResult<Post>> {
     const itemsToSkip = pageNumber * POST_PAGE_SIZE;
 
@@ -30,6 +31,27 @@ export class PostService {
         publicationId: {
           in: publicationIds.split(','),
         },
+      };
+    }
+
+    if (search) {
+      queryOptions.where = {
+        ...queryOptions.where,
+        OR: [
+          { title: { contains: search, mode: 'insensitive' } },
+          { description: { contains: search, mode: 'insensitive' } },
+          {
+            publication: {
+              blogName: { contains: search, mode: 'insensitive' },
+            },
+          },
+          { publication: { name: { contains: search, mode: 'insensitive' } } },
+          {
+            publication: {
+              description: { contains: search, mode: 'insensitive' },
+            },
+          },
+        ],
       };
     }
 

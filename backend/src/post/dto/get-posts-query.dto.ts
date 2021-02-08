@@ -10,4 +10,8 @@ export class GetPostsQueryDto {
   @IsOptional()
   @IsString()
   publicationIds: string;
+
+  @IsOptional()
+  @IsString()
+  search?: string;
 }

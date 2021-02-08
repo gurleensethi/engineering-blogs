@@ -12,6 +12,10 @@ export class PostController {
   public async getAll(
     @Query() query: GetPostsQueryDto,
   ): Promise<PaginatedResult<Post>> {
-    return this.postService.getPosts(query.page, query.publicationIds);
+    return this.postService.getPosts(
+      query.page,
+      query.publicationIds,
+      query.search,
+    );
   }
 }
