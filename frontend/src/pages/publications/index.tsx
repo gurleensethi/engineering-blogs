@@ -3,6 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { FC } from "react";
 import { getAllPublications } from "../../api-client/publications";
+import Search from "../../components/Search";
 import { Publication } from "../../types";
 
 const flairColors = [
@@ -35,8 +36,7 @@ const Publications: FC<Props> = ({ publications }) => {
     window.open(url, "_blank");
   };
 
-  const handleOnSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
+  const handleOnSearchChange = (value: string) => {
     setSearchText(value);
   };
 
@@ -46,29 +46,11 @@ const Publications: FC<Props> = ({ publications }) => {
 
   return (
     <div className="sm:max-w-screen-lg sm:m-auto">
-      <div className="flex transition w-full rounded-md border border-gray-200 mb-8 p-2 focus-within:border-gray-400 focus-within:shadow">
-        <input
-          className="outline-none text-lg text-gray-500 flex-1"
-          placeholder="Search"
-          onChange={handleOnSearchChange}
-          value={searchText}
-        />
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          className="w-6 text-gray-200 hover:text-gray-400 cursor-pointer"
-          onClick={resetSearch}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
-        </svg>
-      </div>
+      <Search
+        onTextChange={handleOnSearchChange}
+        text={searchText}
+        onTextReset={resetSearch}
+      />
       <ul className="sm:flex sm:flex-wrap sm:justify-between">
         {publications
           .filter((publication) => {

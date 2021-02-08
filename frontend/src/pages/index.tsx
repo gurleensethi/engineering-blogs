@@ -1,19 +1,21 @@
 import { GetServerSideProps } from "next";
-import React from "react";
+import React, { useRef, useState } from "react";
 import { getAllPosts } from "../api-client/posts";
 import { Post } from "../types";
 import Link from "next/link";
 import { shortenText } from "../common/utils";
 import { useRouter } from "next/router";
 import { format } from "date-fns";
+import Search from "../components/Search";
 
 type Props = {
   posts: Post[];
   hasNextPage: boolean;
   pageNumber: number;
   publicationIds: string;
+  search: string;
 };
-type Query = { page?: string; publicationIds?: string };
+type Query = { page?: string; publicationIds?: string; search?: string };
 
 const getPubIdsAsQuery = (ids?: string): string => {
   return !!ids ? `&publicationIds=${ids}` : "";
@@ -38,15 +40,37 @@ const Index: React.FC<Props> = ({
   pageNumber,
   publicationIds,
   hasNextPage,
+  search,
 }) => {
+  const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [searchText, setSearchText] = useState(search || "");
   const router = useRouter();
+
+  const fetchPosts = (value: string) => {
+    router.push({ href: "/", query: { ...router.query, search: value } });
+  };
 
   const handlePublicationClick = (id: string): void => {
     router.push(`/?publicationIds=${id}`);
   };
 
+  const handleSearchChange = (value: string) => {
+    setSearchText(value);
+    clearInterval(searchTimeoutRef.current);
+    searchTimeoutRef.current = setTimeout(() => fetchPosts(value), 300);
+  };
+
+  const onSearchReset = () => {
+    setSearchText("");
+  };
+
   return (
     <div className="h-screen flex flex-col items-center sm:max-w-screen-lg m-auto">
+      <Search
+        text={searchText}
+        onTextChange={handleSearchChange}
+        onTextReset={onSearchReset}
+      />
       <ul className="inline-flex flex-wrap justify-between">
         {posts.map((item) => {
           const flairColor = getFlairColor(item.publicationId);
@@ -118,6 +142,7 @@ export const getServerSideProps: GetServerSideProps<Props, Query> = async ({
 }) => {
   let page: number = parseInt((query?.page as string) || "0");
   let publicationIds = query?.publicationIds as string;
+  const search = query?.search as string;
 
   if (page < 0) {
     return {
@@ -131,6 +156,7 @@ export const getServerSideProps: GetServerSideProps<Props, Query> = async ({
   const { data: posts, pageNumber, hasNextPage } = await getAllPosts({
     page,
     publicationIds,
+    search,
   });
 
   return {
@@ -139,6 +165,7 @@ export const getServerSideProps: GetServerSideProps<Props, Query> = async ({
       hasNextPage,
       pageNumber,
       publicationIds: publicationIds || "",
+      search: search || "",
     },
   };
 };
