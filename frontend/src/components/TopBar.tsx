@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import useBreakpoint from "../hooks/useBreakpoint";
@@ -15,7 +16,11 @@ export default function TopBar() {
 
   return (
     <div className="bg-white p-4 w-screen shadow-sm flex items-center">
-      <div className="text-xl text-gray-700 flex-1">Engineering Blogs</div>
+      <div className="flex-1">
+        <Link href="/">
+          <a className="text-lg text-gray-700 ">Engineering Blogs</a>
+        </Link>
+      </div>
       <div>
         <div onClick={toggleDropDown} className="sm:hidden">
           <svg

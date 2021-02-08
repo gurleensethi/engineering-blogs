@@ -1,9 +1,13 @@
+import Head from "next/head";
 import Link from "next/link";
 import React, { FC } from "react";
 
 const About: FC = () => {
   return (
     <div>
+      <Head>
+        <title>About | Engineering Blogs</title>
+      </Head>
       <div className="mb-4 ring-1 ring-gray-200 rounded p-4">
         <h1 className="text-xl mb-2">🤔 What is this website?</h1>
         <p className="text-gray-700">

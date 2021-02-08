@@ -5,6 +5,7 @@ import { FC } from "react";
 import { getAllPublications } from "../../api-client/publications";
 import Search from "../../components/Search";
 import { Publication } from "../../types";
+import Head from "next/head";
 
 const flairColors = [
   "text-red-500 bg-red-100",
@@ -46,6 +47,9 @@ const Publications: FC<Props> = ({ publications }) => {
 
   return (
     <div className="sm:max-w-screen-lg sm:m-auto">
+      <Head>
+        <title>Publications | Engineering Blogs</title>
+      </Head>
       <Search
         onTextChange={handleOnSearchChange}
         text={searchText}

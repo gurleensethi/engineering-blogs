@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { format } from "date-fns";
 import Search from "../components/Search";
 import useDebounce from "../hooks/useDebounce";
+import Head from "next/head";
 
 type Props = {
   posts: Post[];
@@ -61,12 +62,19 @@ const Index: React.FC<Props> = ({
   };
 
   const onSearchReset = () => {
-    setSearchText("");
-    fetchPosts("");
+    setSearchText((value) => {
+      if (value !== "") {
+        fetchPosts("");
+      }
+      return "";
+    });
   };
 
   return (
     <div className="h-screen flex flex-col items-center sm:max-w-screen-lg m-auto">
+      <Head>
+        <title>Posts | Engineering Blogs</title>
+      </Head>
       <Search
         text={searchText}
         onTextChange={handleSearchChange}

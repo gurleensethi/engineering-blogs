@@ -37,7 +37,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <TopBar />
         </div>
         <Loading isLoading={isLoading} />
-        <div className="pt-20 px-8">
+        <div className="px-8 py-24">
           <Component {...pageProps} />
         </div>
       </div>
