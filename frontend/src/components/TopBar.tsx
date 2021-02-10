@@ -63,6 +63,11 @@ export default function TopBar() {
               className="m-2 block sm:m-0"
               onClick={() => setDropDownOpen(false)}
             />
+            <a
+              href={`https://github.com/login/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID}&scope=user,read:user&allow_signup=true&redirect_uri=http://localhost:3000/login/github`}
+            >
+              Login with GitHub
+            </a>
           </div>
         )}
       </div>
