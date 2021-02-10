@@ -26,3 +26,12 @@ model Post {
   publicationId String
   publication   Publication @relation(fields: [publicationId], references: [id])
 }
+
+model User {
+  id          Int      @id
+  firstName   String?
+  lastName    String?
+  username    String
+  createdAt   DateTime
+  accessToken String
+}
