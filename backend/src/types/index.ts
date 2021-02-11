@@ -21,3 +21,8 @@ export interface GitHubUser {
 }
 
 export type PublicUser = Omit<User, 'createdAt' | 'accessToken'>;
+
+export interface TokenPayload {
+  id: number;
+  username: string;
+}

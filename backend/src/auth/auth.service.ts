@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import axios from 'axios';
-import { GitHubTokenResponse, GitHubUser } from 'src/types';
+import { GitHubTokenResponse, GitHubUser, TokenPayload } from 'src/types';
 import { UserService } from 'src/user/user.service';
 import { GitHubLoginDto } from './dto/github-login.dto';
 
@@ -65,5 +65,20 @@ export class AuthService {
     });
 
     return { accessToken };
+  }
+
+  public async authenticateUserWithToken(
+    token: string,
+  ): Promise<TokenPayload | null> {
+    try {
+      const data = await this.jwtService.verifyAsync<{
+        id: number;
+        username: string;
+      }>(token);
+
+      return data;
+    } catch (error) {
+      return null;
+    }
   }
 }

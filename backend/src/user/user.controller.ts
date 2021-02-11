@@ -1,4 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
+import { User } from '@prisma/client';
+import { AuthUser } from 'src/auth/decorator/auth-user.decorator';
 import { UserService } from './user.service';
 
 @Controller('users')
@@ -6,7 +8,7 @@ export class UserController {
   constructor(private userService: UserService) {}
 
   @Get('/me')
-  public async getUser() {
-    return this.userService.getUserById(1);
+  public async getUser(@AuthUser() user: User) {
+    return this.userService.getUserById(user.id);
   }
 }

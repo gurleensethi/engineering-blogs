@@ -6,16 +6,18 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { SyncModule } from './sync/sync.module';
 import { PublicationModule } from './publication/publication.module';
 import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    AuthModule,
     ScheduleModule.forRoot(),
     DatabaseModule,
     PostModule,
     SyncModule,
     PublicationModule,
+    AuthModule,
+    UserModule,
   ],
   controllers: [],
   providers: [],
