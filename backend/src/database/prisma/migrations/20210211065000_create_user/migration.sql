@@ -1,10 +1,10 @@
 -- CreateTable
 CREATE TABLE "User" (
-    "id" INTEGER NOT NULL,
+    "id" SERIAL NOT NULL,
     "firstName" TEXT,
     "lastName" TEXT,
     "username" TEXT NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "accessToken" TEXT NOT NULL,
 
     PRIMARY KEY ("id")
