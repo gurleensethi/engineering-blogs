@@ -28,3 +28,12 @@ export interface Publication {
   description: string;
   link: string;
 }
+
+export type ApiResponse<T> =
+  | { success: true; statusCode: number; data: T }
+  | { success: false; statusCode: number; data?: T };
+
+export interface GitHubLoginResponse {
+  id: number;
+  username: string;
+}

@@ -7,7 +7,11 @@ export const shortenText = (text: string, length = 200): string => {
   return result;
 };
 
-export const addPropertyIfExists = (obj: object, key: string, value: any) => {
+export const addPropertyIfNotExists = (
+  obj: object,
+  key: string,
+  value: any
+) => {
   if (!!value) {
     obj[key] = value;
   }

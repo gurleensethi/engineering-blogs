@@ -1,5 +1,5 @@
 import { GetServerSideProps } from "next";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { getAllPosts } from "../api-client/posts";
 import { Post } from "../types";
 import Link from "next/link";
@@ -148,6 +148,7 @@ export default Index;
 
 export const getServerSideProps: GetServerSideProps<Props, Query> = async ({
   query,
+  req,
 }) => {
   let page: number = parseInt((query?.page as string) || "0");
   let publicationIds = query?.publicationIds as string;

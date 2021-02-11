@@ -1,5 +1,5 @@
 import axios from "axios";
-import { addPropertyIfExists } from "../common/utils";
+import { addPropertyIfNotExists } from "../common/utils";
 import { PaginatedResult, Post } from "../types";
 
 const { BACKEND_URL } = process.env;
@@ -14,9 +14,9 @@ export async function getAllPosts(
   const { page, publicationIds, search } = filters;
 
   const params = {};
-  addPropertyIfExists(params, "page", page);
-  addPropertyIfExists(params, "publicationIds", publicationIds);
-  addPropertyIfExists(params, "search", search);
+  addPropertyIfNotExists(params, "page", page);
+  addPropertyIfNotExists(params, "publicationIds", publicationIds);
+  addPropertyIfNotExists(params, "search", search);
 
   const { data } = await axios.get(`${BACKEND_URL}/posts`, {
     params,
