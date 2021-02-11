@@ -21,7 +21,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   const user = await loginWithGitHub(query.code as string);
 
-  if (user.success) {
+  if (!user.success) {
     return {
       redirect: {
         destination: "/login/error",
@@ -32,7 +32,9 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   res.setHeader(
     "Set-Cookie",
-    `auth.access_token=${JSON.stringify(user.data)}; Path=/`
+    `auth.access_token=${JSON.stringify(
+      user.data
+    )}; Path=/; HttpOnly; SameSite=Lax`
   );
 
   return {

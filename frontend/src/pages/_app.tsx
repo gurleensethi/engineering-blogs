@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import Router from "next/router";
 import Loading from "../components/Loading";
 
-export default function App({ Component, pageProps }: AppProps) {
+const App = ({ Component, pageProps }: AppProps) => {
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -30,6 +30,10 @@ export default function App({ Component, pageProps }: AppProps) {
     };
   }, []);
 
+  useEffect(() => {
+    fetch("/api/v1/api/users/me").then(console.log);
+  }, []);
+
   return (
     <React.StrictMode>
       <div className="bg-white h-screen">
@@ -43,4 +47,6 @@ export default function App({ Component, pageProps }: AppProps) {
       </div>
     </React.StrictMode>
   );
-}
+};
+
+export default App;
