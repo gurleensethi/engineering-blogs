@@ -34,6 +34,12 @@ export type ApiResponse<T> =
   | { success: false; statusCode: number; data?: T };
 
 export interface GitHubLoginResponse {
+  accessToken: string;
+}
+
+export interface User {
   id: number;
   username: string;
+  firstName: string;
+  lastName: string;
 }

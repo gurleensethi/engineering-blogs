@@ -32,9 +32,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   res.setHeader(
     "Set-Cookie",
-    `auth.access_token=${JSON.stringify(
-      user.data
-    )}; Path=/; HttpOnly; SameSite=Lax`
+    `auth.access_token=${user.data.accessToken}; Path=/; HttpOnly; SameSite=Lax`
   );
 
   return {

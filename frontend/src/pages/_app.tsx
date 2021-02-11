@@ -4,6 +4,7 @@ import TopBar from "../components/TopBar";
 import React, { useEffect, useState } from "react";
 import Router from "next/router";
 import Loading from "../components/Loading";
+import UserProvider from "../context/UserProvider";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const [isLoading, setLoading] = useState(false);
@@ -30,21 +31,19 @@ const App = ({ Component, pageProps }: AppProps) => {
     };
   }, []);
 
-  useEffect(() => {
-    fetch("/api/v1/api/users/me").then(console.log);
-  }, []);
-
   return (
     <React.StrictMode>
-      <div className="bg-white h-screen">
-        <div className="fixed">
-          <TopBar />
+      <UserProvider>
+        <div className="bg-white h-screen">
+          <div className="fixed">
+            <TopBar />
+          </div>
+          <Loading isLoading={isLoading} />
+          <div className="px-8 py-24">
+            <Component {...pageProps} />
+          </div>
         </div>
-        <Loading isLoading={isLoading} />
-        <div className="px-8 py-24">
-          <Component {...pageProps} />
-        </div>
-      </div>
+      </UserProvider>
     </React.StrictMode>
   );
 };

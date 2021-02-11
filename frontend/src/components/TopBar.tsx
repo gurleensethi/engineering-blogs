@@ -1,12 +1,14 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "../context/UserProvider";
 import useBreakpoint from "../hooks/useBreakpoint";
 import TopBarLink from "./TopBarLink";
 
 export default function TopBar() {
   const router = useRouter();
   const [isDropDownOpen, setDropDownOpen] = React.useState(false);
+  const userContext = useContext(UserContext);
 
   const toggleDropDown = () => {
     setDropDownOpen((value) => !value);
@@ -63,11 +65,15 @@ export default function TopBar() {
               className="m-2 block sm:m-0"
               onClick={() => setDropDownOpen(false)}
             />
-            <a
-              href={`https://github.com/login/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID}&scope=user,read:user&allow_signup=true&redirect_uri=http://localhost:3000/login/github`}
-            >
-              Login with GitHub
-            </a>
+            {userContext.isLoading ? (
+              "Loading..."
+            ) : (
+              <a
+                href={`https://github.com/login/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID}&scope=user,read:user&allow_signup=true&redirect_uri=http://localhost:3000/login/github`}
+              >
+                Login with GitHub
+              </a>
+            )}
           </div>
         )}
       </div>
