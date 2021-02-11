@@ -19,3 +19,5 @@ export interface GitHubUser {
   name: string;
   email: string;
 }
+
+export type PublicUser = Omit<User, 'createdAt' | 'accessToken'>;
