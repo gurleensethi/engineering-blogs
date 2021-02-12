@@ -54,7 +54,7 @@ export class AuthService {
       });
     } else {
       await this.userService.updateUserToken(
-        githubUserData.email,
+        githubUserData.login,
         data.access_token,
       );
     }
