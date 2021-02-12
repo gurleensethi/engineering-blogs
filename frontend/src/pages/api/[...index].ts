@@ -11,7 +11,7 @@ export default async function Proxy(req: NextApiRequest, res: NextApiResponse) {
     url: `${BACKEND_URL}/${url.substring(12)}`,
     headers: { ...headers, authorization: cookies["auth.access_token"] },
     data: body,
-  }).catch((error) => error.response);
+  }).catch((error) => error.response || { status: 500 });
 
   res.writeHead(status, responseHeaders);
   res.end(JSON.stringify(data));

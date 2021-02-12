@@ -4,7 +4,7 @@ import React, { FC } from "react";
 
 const About: FC = () => {
   return (
-    <div>
+    <div className="sm:max-w-screen-lg m-auto">
       <Head>
         <title>About | Engineering Blogs</title>
       </Head>

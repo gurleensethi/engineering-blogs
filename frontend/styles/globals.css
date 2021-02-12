@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
   box-sizing: border-box;
 }
@@ -7,6 +11,21 @@ body {
   padding: 0px;
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+.btn {
+  @apply transition mt-8 bg-gray-700 px-4 py-2 rounded-lg cursor-pointer text-white;
+  @apply hover:shadow-md hover:bg-gray-900;
+}
+
+.fade-in {
+  animation: fade-in 0.5s;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

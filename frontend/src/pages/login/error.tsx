@@ -9,9 +9,7 @@ const LoginError: FC = () => {
         Don't worry we are working on it!
       </p>
       <Link href="/">
-        <a className="mt-8 bg-gray-700 px-4 py-2 rounded-lg cursor-pointer text-white hover:shadow-md hover:bg-gray-900">
-          Go Home
-        </a>
+        <a className="btn">Go Home</a>
       </Link>
     </div>
   );
