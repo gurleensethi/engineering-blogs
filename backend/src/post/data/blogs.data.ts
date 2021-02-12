@@ -18,6 +18,7 @@ function extractCommonFieldsFromRSS({
 
 export interface BlogSource {
   name: string;
+  blogName?: string;
   link: string;
   description: string;
   feedUrl: string;
@@ -218,6 +219,39 @@ export default <{ [key: string]: BlogSource }>{
     getNextPage: (page) => page + 1,
     getNextPageLink: (pageNumber) =>
       `https://slack.engineering/feed?paged=${pageNumber + 1}`,
+    mapper: (rawJson: any) => {
+      return {
+        ...extractCommonFieldsFromRSS(rawJson),
+      };
+    },
+  },
+  redhat: {
+    name: 'Red Hat',
+    blogName: 'Red Hat Developer',
+    link: 'https://developers.redhat.com/blog',
+    description:
+      'Stories and tutorials on the latest technologies in cloud application development.',
+    feedUrl: 'https://developers.redhat.com/blog/feed',
+    isPaged: true,
+    getNextPage: (page) => page + 1,
+    getNextPageLink: (pageNumber) =>
+      `https://developers.redhat.com/blog/feed?paged=${pageNumber + 1}`,
+    mapper: (rawJson: any) => {
+      return {
+        ...extractCommonFieldsFromRSS(rawJson),
+      };
+    },
+  },
+  docker: {
+    name: 'Docker',
+    blogName: 'Docker Blog',
+    link: 'https://blog.docker.com',
+    description: 'Docker Blog',
+    feedUrl: 'https://blog.docker.com/feed',
+    isPaged: true,
+    getNextPage: (page) => page + 1,
+    getNextPageLink: (pageNumber) =>
+      `https://blog.docker.com/feed?paged=${pageNumber + 1}`,
     mapper: (rawJson: any) => {
       return {
         ...extractCommonFieldsFromRSS(rawJson),

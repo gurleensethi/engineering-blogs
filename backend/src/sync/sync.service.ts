@@ -59,7 +59,7 @@ export class SyncService {
     }
 
     if (!result.blogName) {
-      result.blogName = blog.name;
+      result.blogName = blog.blogName || blog.name;
     }
 
     if (!result.link) {
