@@ -80,7 +80,7 @@ export default function TopBar() {
               />
             ) : (
               <a
-                href={`https://github.com/login/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID}&scope=user,read:user&allow_signup=true&redirect_uri=http://localhost:3000/login/github`}
+                href={`https://github.com/login/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID}&scope=user,read:user&allow_signup=true`}
                 className="outline-none transition flex justify-center items-center ring-1 ring-gray-500 rounded px-2 py-1 m-4 cursor-pointer sm:m-0 hover:bg-gray-100"
               >
                 <Image

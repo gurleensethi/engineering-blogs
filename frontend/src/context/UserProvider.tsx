@@ -15,8 +15,13 @@ const UserProvider: FC = ({ children }) => {
   }));
 
   useEffect(() => {
-    fetch("/api/v1/api/users/me")
-      .then((data) => data.json())
+    fetch("/api/users/me")
+      .then((data) => {
+        if (data.ok) {
+          return data.json();
+        }
+        throw new Error(`Unable to get data!`);
+      })
       .then((data) => setUser({ isLoading: false, data }))
       .catch(() => setUser({ isLoading: false, data: null }));
   }, []);
