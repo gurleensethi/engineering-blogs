@@ -17,7 +17,7 @@ const TopBarLink: FC<Props> = ({
   return (
     <Link href={href}>
       <a
-        className={`text-gray-500 cursor-pointer outline-none ${
+        className={`text-gray-500 dark:text-white cursor-pointer outline-none ${
           isActive ? "underline" : "opacity-50"
         } ${className}`}
         {...rest}

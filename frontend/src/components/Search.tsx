@@ -8,9 +8,9 @@ type Props = {
 
 const Search: FC<Props> = ({ onTextChange, onTextReset, text }) => {
   return (
-    <div className="flex items-center transition w-full rounded-md border border-gray-200 mb-8 p-2 focus-within:border-gray-400 focus-within:shadow">
+    <div className="flex items-center transition w-full rounded-md border border-gray-200 dark:border-gray-500 mb-8 p-2 focus-within:border-gray-400 dark:focus-within:border-gray-200 focus-within:shadow">
       <input
-        className="outline-none text-lg text-gray-500 flex-1"
+        className="outline-none text-lg text-gray-500 dark:text-white flex-1 dark:bg-gray-900"
         placeholder="Search"
         onChange={(event) => onTextChange(event.target.value)}
         value={text}
@@ -20,7 +20,7 @@ const Search: FC<Props> = ({ onTextChange, onTextReset, text }) => {
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
-        className="w-6 text-gray-200 hover:text-gray-400 cursor-pointer"
+        className="w-6 text-gray-200 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-200 cursor-pointer"
         onClick={onTextReset}
       >
         <path

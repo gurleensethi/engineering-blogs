@@ -1,5 +1,5 @@
 import { GetServerSideProps } from "next";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { getAllPosts } from "../api-client/posts";
 import { Post } from "../types";
 import Link from "next/link";
@@ -9,6 +9,7 @@ import { format } from "date-fns";
 import Search from "../components/Search";
 import useDebounce from "../hooks/useDebounce";
 import Head from "next/head";
+import { FlairColorsContext } from "../context/FlairColors";
 
 type Props = {
   posts: Post[];
@@ -23,20 +24,6 @@ const getPubIdsAsQuery = (ids?: string): string => {
   return !!ids ? `&publicationIds=${ids}` : "";
 };
 
-const flairColors = [
-  "text-red-500 bg-red-100",
-  "text-blue-500 bg-blue-100",
-  "text-green-500 bg-green-100",
-  "text-teal-500 bg-teal-100",
-  "text-orange-500 bg-orange-100",
-  "text-indigo-500 bg-indigo-100",
-  "text-violet-500 bg-violet-100",
-];
-
-const getFlairColor = (id: string): string => {
-  return flairColors[id.charCodeAt(0) % flairColors.length];
-};
-
 const Index: React.FC<Props> = ({
   posts,
   pageNumber,
@@ -47,6 +34,7 @@ const Index: React.FC<Props> = ({
   const [searchText, setSearchText] = useState(search || "");
   const router = useRouter();
   const [searchDebounce] = useDebounce(500);
+  const { getFlairColor } = useContext(FlairColorsContext);
 
   const fetchPosts = (value: string) => {
     router.push({ href: "/", query: { ...router.query, search: value } });
@@ -71,7 +59,7 @@ const Index: React.FC<Props> = ({
   };
 
   return (
-    <div className="h-screen flex flex-col items-center sm:max-w-screen-lg m-auto">
+    <div className="flex flex-col items-center sm:max-w-screen-lg m-auto">
       <Head>
         <title>Posts | Engineering Blogs</title>
       </Head>
@@ -86,7 +74,7 @@ const Index: React.FC<Props> = ({
 
           return (
             <li
-              className="ring-1 ring-gray-200 rounded-md mb-8 transition hover:shadow-xl cursor-pointer w-full sm:w-custom/48"
+              className="ring-1 ring-gray-200 dark:ring-gray-500 rounded-md mb-8 transition hover:shadow-xl dark:hover:bg-gray-800 cursor-pointer w-full sm:w-custom/48"
               key={item.guid}
             >
               <a
@@ -107,14 +95,14 @@ const Index: React.FC<Props> = ({
                     >
                       {item.publication.name}
                     </div>
-                    <div className="text-xs text-gray-500 flex-1 text-right">
+                    <div className="text-xs text-gray-500 dark:text-gray-400 flex-1 text-right">
                       {format(new Date(item.pubDate), "dd-MMM-yyyy")}
                     </div>
                   </div>
-                  <div className="mb-2 text-lg text-gray-700 font-medium">
+                  <div className="mb-2 text-lg text-gray-700 dark:text-gray-100 font-medium">
                     {item.title}
                   </div>
-                  <div className="mb-2 text-sm text-gray-500">
+                  <div className="mb-2 text-sm text-gray-500 dark:text-gray-400">
                     {shortenText(item.description)}
                   </div>
                 </div>

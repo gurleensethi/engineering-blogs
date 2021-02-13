@@ -1,25 +1,12 @@
 import { GetServerSideProps } from "next";
 import Link from "next/link";
-import React from "react";
+import React, { useContext } from "react";
 import { FC } from "react";
 import { getAllPublications } from "../../api-client/publications";
 import Search from "../../components/Search";
 import { Publication } from "../../types";
 import Head from "next/head";
-
-const flairColors = [
-  "text-red-500 bg-red-100",
-  "text-blue-500 bg-blue-100",
-  "text-green-500 bg-green-100",
-  "text-teal-500 bg-teal-100",
-  "text-orange-500 bg-orange-100",
-  "text-indigo-500 bg-indigo-100",
-  "text-violet-500 bg-violet-100",
-];
-
-const getFlairColor = (id: string): string => {
-  return flairColors[id.charCodeAt(0) % flairColors.length];
-};
+import { FlairColorsContext } from "../../context/FlairColors";
 
 type ServerSideProps = { publications: Publication[] };
 
@@ -27,6 +14,7 @@ type Props = ServerSideProps;
 
 const Publications: FC<Props> = ({ publications }) => {
   const [searchText, setSearchText] = React.useState("");
+  const { getFlairColor } = useContext(FlairColorsContext);
 
   const handleOpenBlogLink = (
     event: React.MouseEvent<HTMLParagraphElement>,
@@ -74,10 +62,13 @@ const Publications: FC<Props> = ({ publications }) => {
             const flairColor = getFlairColor(publication.id);
 
             return (
-              <li key={publication.id} className="mb-6 sm:w-custom/48">
+              <li
+                key={publication.id}
+                className="transition mb-6 sm:w-custom/48 dark:hover:bg-gray-800"
+              >
                 <Link href={`/?publicationIds=${publication.id}`}>
                   <a className="outline-none">
-                    <div className="ring-1 ring-gray-200 rounded-md p-4 transition hover:shadow-xl cursor-pointer h-full">
+                    <div className="ring-1 ring-gray-200 dark:ring-gray-500 rounded-md p-4 transition hover:shadow-xl cursor-pointer h-full">
                       <div className="flex items-center">
                         <div className="flex-1 mb-2">
                           <h3
@@ -95,8 +86,10 @@ const Publications: FC<Props> = ({ publications }) => {
                           Blog Link
                         </p>
                       </div>
-                      <h2 className="mb-2">{publication.blogName}</h2>
-                      <h2 className="text-gray-500 text-sm">
+                      <h2 className="mb-2 text-gray-700 dark:text-gray-100">
+                        {publication.blogName}
+                      </h2>
+                      <h2 className="text-gray-500 dark:text-gray-400 text-sm">
                         {publication.description}
                       </h2>
                     </div>
