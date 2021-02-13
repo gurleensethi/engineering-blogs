@@ -23,7 +23,17 @@ export default function TopBar() {
     <div className="bg-white dark:bg-black p-4 w-screen shadow-sm flex items-center">
       <div className="flex-1">
         <Link href="/">
-          <a className="text-lg text-gray-700 dark:text-white">
+          <a className="text-lg text-gray-700 dark:text-white flex items-center">
+            <img
+              height={20}
+              width={20}
+              src={
+                darkMode.isEnabled
+                  ? "/images/logo-white.png"
+                  : "/images/logo.png"
+              }
+              className="mr-2"
+            />
             Engineering Blogs
           </a>
         </Link>

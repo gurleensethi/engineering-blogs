@@ -81,7 +81,7 @@ const Publications: FC<Props> = ({ publications }) => {
                           onClick={(event) =>
                             handleOpenBlogLink(event, publication.link)
                           }
-                          className="text-xs text-blue-500 underline hover:text-blue-700"
+                          className="text-sm text-blue-500 underline hover:text-blue-700 dark:text-gray-100 dark:hover:text-gray-500"
                         >
                           Blog Link
                         </p>

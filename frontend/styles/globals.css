@@ -15,6 +15,7 @@ body {
 .btn {
   @apply transition mt-8 bg-gray-700 px-4 py-2 rounded-lg cursor-pointer text-white;
   @apply hover:shadow-md hover:bg-gray-900;
+  @apply dark:bg-white dark:text-black dark:hover:bg-gray-500;
 }
 
 .fade-in {

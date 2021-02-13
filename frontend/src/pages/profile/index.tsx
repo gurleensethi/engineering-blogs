@@ -24,11 +24,13 @@ const Profile: FC = () => {
 
   return (
     <div className="fade-in">
-      <h1 className="tracking-wider text-gray-500">@{user.data.username}</h1>
-      <h2 className="text-3xl text-gray-700">
+      <h1 className="tracking-widest text-gray-500 dark:text-gray-300">
+        @{user.data.username}
+      </h1>
+      <h2 className="text-3xl text-gray-700 dark:text-gray-100">
         {user.data.firstName} {user.data.lastName}
       </h2>
-      <p className="my-8 text-gray-700">
+      <p className="my-8 text-gray-700 dark:text-gray-300">
         Nothing much here really, lets go back{" "}
         <Link href="/">
           <a className="transition cursor-pointer text-blue-500 underline hover:text-blue-700">
@@ -37,11 +39,9 @@ const Profile: FC = () => {
         </Link>
         .
       </p>
-      {/* <Link href="/logout"> */}
       <a className="btn" href="/logout">
         Logout
       </a>
-      {/* </Link> */}
     </div>
   );
 };
