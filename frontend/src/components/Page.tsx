@@ -33,12 +33,12 @@ export const Page: FC<AppProps> = ({ Component, pageProps }) => {
 
   return (
     <div className={`${darkMode.isEnabled ? "dark" : ""}`}>
-      <div className="bg-white dark:bg-gray-900 h-screen">
+      <div className="h-screen w-screen">
         <div className="fixed">
           <TopBar />
         </div>
         <TopBarLoading isLoading={isLoading} />
-        <div className="px-8 py-24 fade-in h-screen w-screen overflow-scroll">
+        <div className="px-8 py-24 fade-in bg-white dark:bg-gray-900 min-h-full min-w-full">
           <Component {...pageProps} />
         </div>
       </div>

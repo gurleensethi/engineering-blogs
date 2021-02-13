@@ -59,7 +59,7 @@ const Index: React.FC<Props> = ({
   };
 
   return (
-    <div className="flex flex-col items-center sm:max-w-screen-lg m-auto">
+    <div className="flex flex-col items-center sm:max-w-screen-lg m-auto h-full w-full">
       <Head>
         <title>Posts | Engineering Blogs</title>
       </Head>

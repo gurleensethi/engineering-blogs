@@ -81,7 +81,7 @@ export default function TopBar() {
           </svg>
         </div>
         {(isDropDownOpen || isSmall) && (
-          <div className="absolute left-0 right-0 top-full m-2 rounded-md p-2 shadow-lg sm:flex sm:items-center sm:relative sm:left-auto sm:top-auto sm:right-auto sm:shadow-none sm:m-0 sm:p-0">
+          <div className="bg-white dark:bg-black absolute left-0 right-0 top-full m-2 rounded-md p-2 shadow-lg sm:flex sm:items-center sm:relative sm:left-auto sm:top-auto sm:right-auto sm:shadow-none sm:m-0 sm:p-0">
             <TopBarLink
               href="/"
               isActive={router.pathname === "/"}
