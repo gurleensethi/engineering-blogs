@@ -1,13 +1,13 @@
-import Head from "next/head";
 import Link from "next/link";
 import React, { FC } from "react";
+import Layout from "../components/Layout";
 
 const About: FC = () => {
   return (
-    <div className="sm:max-w-screen-lg m-auto text-gray-700 dark:text-white">
-      <Head>
-        <title>About | Engineering Blogs</title>
-      </Head>
+    <Layout
+      title="About | Engineering Blogs"
+      className="sm:max-w-screen-lg m-auto text-gray-700 dark:text-white"
+    >
       <div className="mb-4 ring-1 ring-gray-200 dark:ring-gray-500 rounded p-4">
         <h1 className="text-xl mb-2">🤔 What is this website?</h1>
         <p className="">
@@ -64,7 +64,7 @@ const About: FC = () => {
       <p className="mb-4 text-gray-400 dark:text-white text-lg text-center">
         have a great day!
       </p>
-    </div>
+    </Layout>
   );
 };
 

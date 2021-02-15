@@ -38,7 +38,7 @@ export const Page: FC<AppProps> = ({ Component, pageProps }) => {
           <TopBar />
         </div>
         <TopBarLoading isLoading={isLoading} />
-        <div className="px-8 py-24 fade-in bg-white dark:bg-gray-900 min-h-full min-w-full">
+        <div className="px-8 py-24 bg-white dark:bg-gray-900 min-h-full min-w-full">
           <Component {...pageProps} />
         </div>
       </div>

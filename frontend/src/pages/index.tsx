@@ -8,8 +8,8 @@ import { useRouter } from "next/router";
 import { format } from "date-fns";
 import Search from "../components/Search";
 import useDebounce from "../hooks/useDebounce";
-import Head from "next/head";
 import { FlairColorsContext } from "../context/FlairColors";
+import Layout from "../components/Layout";
 
 type Props = {
   posts: Post[];
@@ -59,10 +59,10 @@ const Index: React.FC<Props> = ({
   };
 
   return (
-    <div className="flex flex-col items-center sm:max-w-screen-lg m-auto h-full w-full">
-      <Head>
-        <title>Posts | Engineering Blogs</title>
-      </Head>
+    <Layout
+      title="Posts | Engineering Blogs"
+      className="flex flex-col items-center sm:max-w-screen-lg m-auto h-full w-full"
+    >
       <Search
         text={searchText}
         onTextChange={handleSearchChange}
@@ -128,7 +128,7 @@ const Index: React.FC<Props> = ({
           </Link>
         )}
       </div>
-    </div>
+    </Layout>
   );
 };
 

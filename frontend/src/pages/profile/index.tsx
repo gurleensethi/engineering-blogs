@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FC, useContext } from "react";
+import Layout from "../../components/Layout";
 import Loading from "../../components/Loading";
 import { UserContext } from "../../context/UserProvider";
 
@@ -23,7 +24,7 @@ const Profile: FC = () => {
   }
 
   return (
-    <div className="fade-in">
+    <Layout className="fade-in" title="Profile">
       <h1 className="tracking-widest text-gray-500 dark:text-gray-300">
         @{user.data.username}
       </h1>
@@ -42,7 +43,7 @@ const Profile: FC = () => {
       <a className="btn" href="/logout">
         Logout
       </a>
-    </div>
+    </Layout>
   );
 };
 

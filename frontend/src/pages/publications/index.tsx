@@ -5,8 +5,8 @@ import { FC } from "react";
 import { getAllPublications } from "../../api-client/publications";
 import Search from "../../components/Search";
 import { Publication } from "../../types";
-import Head from "next/head";
 import { FlairColorsContext } from "../../context/FlairColors";
+import Layout from "../../components/Layout";
 
 type ServerSideProps = { publications: Publication[] };
 
@@ -34,10 +34,10 @@ const Publications: FC<Props> = ({ publications }) => {
   };
 
   return (
-    <div className="sm:max-w-screen-lg sm:m-auto">
-      <Head>
-        <title>Publications | Engineering Blogs</title>
-      </Head>
+    <Layout
+      title="Publications | Engineering Blogs"
+      className="sm:max-w-screen-lg sm:m-auto"
+    >
       <Search
         onTextChange={handleOnSearchChange}
         text={searchText}
@@ -99,7 +99,7 @@ const Publications: FC<Props> = ({ publications }) => {
             );
           })}
       </ul>
-    </div>
+    </Layout>
   );
 };
 
