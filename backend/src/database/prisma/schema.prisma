@@ -28,10 +28,10 @@ model Post {
 }
 
 model User {
-  id          Int      @id @default(autoincrement())
-  firstName   String?
-  lastName    String?
-  username    String   @unique
-  createdAt   DateTime @default(now())
-  accessToken String
+  id        Int      @id @default(autoincrement())
+  firstName String?
+  lastName  String?
+  username  String
+  email     String   @unique
+  createdAt DateTime @default(now())
 }

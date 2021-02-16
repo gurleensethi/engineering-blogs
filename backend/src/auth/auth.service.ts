@@ -41,22 +41,17 @@ export class AuthService {
       },
     );
 
-    let user = await this.userService.getUser(githubUserData.login);
+    let user = await this.userService.getUserByEmail(githubUserData.email);
 
     const nameSplits = githubUserData?.name?.split(' ');
 
     if (!user) {
       user = await this.userService.createUser({
+        email: githubUserData.email,
         username: githubUserData.login,
-        accessToken: data.access_token,
         firstName: nameSplits[0],
         lastName: nameSplits[1],
       });
-    } else {
-      await this.userService.updateUserToken(
-        githubUserData.login,
-        data.access_token,
-      );
     }
 
     const accessToken = await this.jwtService.signAsync({

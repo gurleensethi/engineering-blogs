@@ -20,7 +20,7 @@ export interface GitHubUser {
   email: string;
 }
 
-export type PublicUser = Omit<User, 'createdAt' | 'accessToken'>;
+export type PublicUser = Omit<User, 'createdAt'>;
 
 export interface TokenPayload {
   id: number;

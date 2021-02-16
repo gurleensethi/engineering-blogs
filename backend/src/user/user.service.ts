@@ -13,24 +13,20 @@ export class UserService {
     });
   }
 
-  public async getUser(username: string): Promise<User | null> {
-    return this.prismaService.user.findFirst({ where: { username } });
-  }
-
-  public async updateUserToken(
-    username: string,
-    accessToken: string,
-  ): Promise<void> {
-    await this.prismaService.user.update({
-      where: { username },
-      data: { accessToken },
-    });
+  public async getUserByEmail(email: string): Promise<User | null> {
+    return this.prismaService.user.findFirst({ where: { email } });
   }
 
   public async getUserById(id: number): Promise<PublicUser> {
     const user = await this.prismaService.user.findFirst({
       where: { id },
-      select: { id: true, username: true, firstName: true, lastName: true },
+      select: {
+        id: true,
+        username: true,
+        firstName: true,
+        lastName: true,
+        email: true,
+      },
     });
 
     if (!user) {
