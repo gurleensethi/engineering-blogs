@@ -8,12 +8,13 @@ generator client {
 }
 
 model Publication {
-  id          String @id
-  name        String
-  blogName    String
-  description String
-  link        String
-  posts       Post[]
+  id              String            @id
+  name            String
+  blogName        String
+  description     String
+  link            String
+  posts           Post[]
+  UserPublication UserPublication[]
 }
 
 model Post {
@@ -28,10 +29,20 @@ model Post {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  firstName String?
-  lastName  String?
-  username  String
-  email     String   @unique
-  createdAt DateTime @default(now())
+  id           Int               @id @default(autoincrement())
+  firstName    String?
+  lastName     String?
+  username     String
+  email        String            @unique
+  createdAt    DateTime          @default(now())
+  publications UserPublication[]
+}
+
+model UserPublication {
+  publication   Publication @relation(fields: [publicationId], references: [id])
+  user          User        @relation(fields: [userId], references: [id])
+  publicationId String
+  userId        Int
+
+  @@id(fields: [userId, publicationId])
 }
