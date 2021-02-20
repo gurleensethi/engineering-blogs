@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Publication } from '@prisma/client';
 import { PrismaService } from 'src/database/prisma.service';
 
@@ -13,5 +13,22 @@ export class UserPublicationService {
         include: { publication: true },
       })
       .then((data) => data.map((item) => item.publication));
+  }
+
+  public async addPublication(
+    userId: number,
+    publicationId: string,
+  ): Promise<void> {
+    const existingEntry = await this.prismaService.userPublication.findFirst({
+      where: { userId, publicationId },
+    });
+
+    if (existingEntry) {
+      return;
+    }
+
+    await this.prismaService.userPublication.create({
+      data: { userId, publicationId },
+    });
   }
 }
