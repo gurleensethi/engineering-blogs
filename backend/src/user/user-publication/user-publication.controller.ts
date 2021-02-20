@@ -1,7 +1,8 @@
-import { Body, Controller, Get, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Put } from '@nestjs/common';
 import { User } from '@prisma/client';
 import { AuthUser } from 'src/auth/decorator/auth-user.decorator';
 import { AddPublicationDto } from './dto/add-publication.dto';
+import { RemovePublicationDto } from './dto/remove-publication';
 import { UserPublicationService } from './user-publication.service';
 
 @Controller('users/publications')
@@ -21,6 +22,17 @@ export class UserPublicationController {
     return this.userPublicationService.addPublication(
       user.id,
       addPublicationDto.publicationId,
+    );
+  }
+
+  @Delete()
+  public async removePublication(
+    @AuthUser() user: User,
+    @Body() removePublicationDto: RemovePublicationDto,
+  ) {
+    return this.userPublicationService.removePulication(
+      user.id,
+      removePublicationDto.publicationId,
     );
   }
 }

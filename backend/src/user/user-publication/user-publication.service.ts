@@ -31,4 +31,21 @@ export class UserPublicationService {
       data: { userId, publicationId },
     });
   }
+
+  public async removePulication(
+    userId: number,
+    publicationId: string,
+  ): Promise<void> {
+    const existingEntry = await this.prismaService.userPublication.findFirst({
+      where: { userId, publicationId },
+    });
+
+    if (!existingEntry) {
+      return;
+    }
+
+    await this.prismaService.userPublication.delete({
+      where: { userId_publicationId: { userId, publicationId } },
+    });
+  }
 }
