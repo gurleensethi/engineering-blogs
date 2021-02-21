@@ -43,3 +43,8 @@ export interface User {
   firstName: string;
   lastName: string;
 }
+
+export enum FeedType {
+  ALL = "all",
+  MY_FEED = "my_feed",
+}

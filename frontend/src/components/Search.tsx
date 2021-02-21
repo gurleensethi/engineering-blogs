@@ -4,11 +4,20 @@ type Props = {
   text: string;
   onTextChange: (text: string) => void;
   onTextReset: () => void;
-};
+} & React.HTMLAttributes<HTMLDivElement>;
 
-const Search: FC<Props> = ({ onTextChange, onTextReset, text }) => {
+const Search: FC<Props> = ({
+  onTextChange,
+  onTextReset,
+  text,
+  className,
+  ...rest
+}) => {
   return (
-    <div className="flex items-center transition w-full rounded-md border border-gray-200 dark:border-gray-500 mb-8 p-2 focus-within:border-gray-400 dark:focus-within:border-gray-200 focus-within:shadow">
+    <div
+      className={`${className} flex items-center transition w-full rounded-md border border-gray-200 dark:border-gray-500 p-2 focus-within:border-gray-400 dark:focus-within:border-gray-200 focus-within:shadow`}
+      {...rest}
+    >
       <input
         className="outline-none text-lg text-gray-500 dark:text-white flex-1 dark:bg-gray-900"
         placeholder="Search"

@@ -10,6 +10,7 @@ import Search from "../components/Search";
 import useDebounce from "../hooks/useDebounce";
 import { FlairColorsContext } from "../context/FlairColors";
 import Layout from "../components/Layout";
+import MultiSwitch from "../components/switch/MultiSwitch";
 
 type Props = {
   posts: Post[];
@@ -31,6 +32,7 @@ const Index: React.FC<Props> = ({
   hasNextPage,
   search,
 }) => {
+  const [feed, setFeed] = useState("all");
   const [searchText, setSearchText] = useState(search || "");
   const router = useRouter();
   const [searchDebounce] = useDebounce(500);
@@ -58,6 +60,15 @@ const Index: React.FC<Props> = ({
     });
   };
 
+  const handleFeedSelect = (id: string) => {
+    setFeed(id);
+    router.push(
+      router.route,
+      { query: { ...router.query, feed: id } },
+      { shallow: true }
+    );
+  };
+
   return (
     <Layout
       title="Posts | Engineering Blogs"
@@ -67,6 +78,15 @@ const Index: React.FC<Props> = ({
         text={searchText}
         onTextChange={handleSearchChange}
         onTextReset={onSearchReset}
+      />
+      <MultiSwitch
+        className="my-2"
+        selectedId={feed}
+        options={[
+          { id: "all", name: "All" },
+          { id: "my_feed", name: "My Feed" },
+        ]}
+        onOptionSelect={handleFeedSelect}
       />
       <ul className="inline-flex flex-wrap justify-between">
         {posts.map((item) => {
