@@ -23,18 +23,18 @@ const MultiSwitch: FC<Props> = ({
       {options.map((item, index) => (
         <div
           key={item.id}
-          className="flex items-center cursor-pointer"
+          className="flex-col justify-center items-center cursor-pointer px-4 py-2"
           onClick={() => onOptionSelect(item.id)}
         >
           <div
-            className={`transition p-2 text-lg ${
+            className={`transition ${
               selectedId === item.id ? "text-gray-700" : "text-gray-400"
             }`}
           >
             {item.name}
           </div>
-          {index !== options.length - 1 && (
-            <div className="h-4 bg-gray-300 mx-2" style={{ width: "1.5px" }} />
+          {selectedId === item.id && (
+            <div className="h-0.5 bg-gray-700 w-full fade-in" />
           )}
         </div>
       ))}

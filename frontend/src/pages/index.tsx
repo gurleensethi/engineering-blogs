@@ -156,7 +156,6 @@ export default Index;
 
 export const getServerSideProps: GetServerSideProps<Props, Query> = async ({
   query,
-  req,
 }) => {
   let page: number = parseInt((query?.page as string) || "0");
   let publicationIds = query?.publicationIds as string;
