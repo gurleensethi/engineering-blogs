@@ -24,11 +24,12 @@ const MultiSwitch: FC<MultiSwitchProps> = ({
   children,
   ...rest
 }) => {
-  const [selectedOption, setSelectedOption] = useState("all");
-
   return (
     <MultiSwitchContext.Provider
-      value={{ selectedOption, setSelectedOption: setSelectedOption }}
+      value={{
+        selectedOption: selectedId,
+        setSelectedOption: onOptionSelect,
+      }}
     >
       <div className={`${className} flex w-full sm:justify-end`} {...rest}>
         {children}

@@ -11,6 +11,8 @@ import useDebounce from "../hooks/useDebounce";
 import { FlairColorsContext } from "../context/FlairColors";
 import Layout from "../components/Layout";
 import MultiSwitch, { MultiSwitchItem } from "../components/switch/MultiSwitch";
+import Tooltip from "../components/tooltip/Tooltip";
+import { UserContext } from "../context/UserProvider";
 
 type Props = {
   posts: Post[];
@@ -34,9 +36,11 @@ const Index: React.FC<Props> = ({
 }) => {
   const [feed, setFeed] = useState("all");
   const [searchText, setSearchText] = useState(search || "");
+  const [showLoginTooltip, setShowLoginTooltip] = useState(false);
   const router = useRouter();
   const [searchDebounce] = useDebounce(500);
   const { getFlairColor } = useContext(FlairColorsContext);
+  const user = useContext(UserContext);
 
   const fetchPosts = (value: string) => {
     router.push({ href: "/", query: { ...router.query, search: value } });
@@ -61,7 +65,8 @@ const Index: React.FC<Props> = ({
   };
 
   const handleFeedSelect = (id: string) => {
-    if (id === "my_feed") {
+    if (id === "my_feed" && !user.data) {
+      setShowLoginTooltip(true);
       return;
     }
 
@@ -89,7 +94,12 @@ const Index: React.FC<Props> = ({
         onOptionSelect={handleFeedSelect}
       >
         <MultiSwitchItem id="all" name="All" />
-        <MultiSwitchItem id="my_feed" name="My Feed" />
+        <Tooltip
+          visible={showLoginTooltip}
+          text="Please login to access My Feed. Click on 'Login with GitHub' in the menu."
+        >
+          <MultiSwitchItem id="my_feed" name="My Feed" />
+        </Tooltip>
       </MultiSwitch>
       <ul className="inline-flex flex-wrap justify-between">
         {posts.map((item) => {
