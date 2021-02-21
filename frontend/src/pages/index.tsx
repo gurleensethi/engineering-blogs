@@ -10,7 +10,7 @@ import Search from "../components/Search";
 import useDebounce from "../hooks/useDebounce";
 import { FlairColorsContext } from "../context/FlairColors";
 import Layout from "../components/Layout";
-import MultiSwitch from "../components/switch/MultiSwitch";
+import MultiSwitch, { MultiSwitchItem } from "../components/switch/MultiSwitch";
 
 type Props = {
   posts: Post[];
@@ -61,6 +61,10 @@ const Index: React.FC<Props> = ({
   };
 
   const handleFeedSelect = (id: string) => {
+    if (id === "my_feed") {
+      return;
+    }
+
     setFeed(id);
     router.push(
       router.route,
@@ -82,12 +86,11 @@ const Index: React.FC<Props> = ({
       <MultiSwitch
         className="my-2"
         selectedId={feed}
-        options={[
-          { id: "all", name: "All" },
-          { id: "my_feed", name: "My Feed" },
-        ]}
         onOptionSelect={handleFeedSelect}
-      />
+      >
+        <MultiSwitchItem id="all" name="All" />
+        <MultiSwitchItem id="my_feed" name="My Feed" />
+      </MultiSwitch>
       <ul className="inline-flex flex-wrap justify-between">
         {posts.map((item) => {
           const flairColor = getFlairColor(item.publicationId);
