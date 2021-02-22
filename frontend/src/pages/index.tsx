@@ -124,16 +124,11 @@ const Index: React.FC<Props> = ({
                     height="10"
                     width="10"
                     onError={function (event) {
-                      console.log(event.target);
-                      (event.target as HTMLImageElement).src =
-                        "/images/logo.png";
-                      (event.target as HTMLImageElement).classList.remove(
-                        "object-cover"
-                      );
-                      (event.target as HTMLImageElement).classList.add(
-                        "object-contain"
-                      );
-                      (event.target as HTMLImageElement).classList.add("p-12");
+                      const imgElement: HTMLImageElement = event.target as HTMLImageElement;
+                      imgElement.src = "/images/logo.png";
+                      imgElement.classList.remove("object-cover");
+                      imgElement.classList.add("object-contain");
+                      imgElement.classList.add("p-12");
                     }}
                   />
                   <div className="p-4 flex flex-col h-full">

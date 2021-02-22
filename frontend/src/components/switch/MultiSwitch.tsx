@@ -47,8 +47,6 @@ export const MultiSwitchItem: FC<Option> = ({ id, name }) => {
       key={id}
       className="flex-col justify-center items-center cursor-pointer py-2 pr-4"
       onClick={() => setSelectedOption(id)}
-      onFocus={() => console.log("onFocus")}
-      onBlur={() => console.log("onBlur")}
     >
       <div
         className={`transition ${

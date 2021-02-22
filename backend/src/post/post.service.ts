@@ -78,15 +78,32 @@ export class PostService {
     return this.prismaService.post.create({ data: createPostDto });
   }
 
-  public async createManyPosts(posts: Post[]): Promise<void> {
+  public async createManyPosts(posts: Prisma.PostUpdateInput[]): Promise<void> {
     await this.prismaService.$transaction(
       posts.map((post) => {
         return this.prismaService.post.upsert({
-          create: post,
+          create: post as Post,
           update: post,
-          where: { postId: post.postId },
+          where: { postId: post.postId as string },
         });
       }),
+    );
+  }
+
+  public async getPostsWithoutImages(): Promise<Post[]> {
+    return this.prismaService.post.findMany({ where: { imageUrl: null } });
+  }
+
+  public async updatePostImages(
+    posts: { postId: string; imageUrl: string | null }[],
+  ): Promise<void> {
+    await this.prismaService.$transaction(
+      posts.map(({ postId, imageUrl }) =>
+        this.prismaService.post.update({
+          where: { postId: postId },
+          data: { imageUrl: imageUrl },
+        }),
+      ),
     );
   }
 }

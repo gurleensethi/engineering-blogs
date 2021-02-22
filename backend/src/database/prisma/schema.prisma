@@ -25,6 +25,7 @@ model Post {
   pubDate       DateTime
   link          String
   publicationId String
+  imageUrl      String?
   publication   Publication @relation(fields: [publicationId], references: [id])
 }
 

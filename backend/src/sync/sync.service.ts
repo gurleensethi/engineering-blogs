@@ -4,9 +4,10 @@ import blogsData, { BlogSource } from 'src/post/data/blogs.data';
 import { PostService } from 'src/post/post.service';
 import * as xmlParser from 'fast-xml-parser';
 import axios from 'axios';
-import { Post, Publication } from '@prisma/client';
+import { Prisma, Publication } from '@prisma/client';
 import { PublicationService } from 'src/publication/publication.service';
 import { htmlToText } from 'html-to-text';
+import { PostImageService } from 'src/post/post-image.service';
 
 @Injectable({ scope: Scope.DEFAULT })
 export class SyncService {
@@ -15,6 +16,7 @@ export class SyncService {
   constructor(
     private postService: PostService,
     private publicationService: PublicationService,
+    private postImageService: PostImageService,
   ) {
     this.syncPosts();
   }
@@ -93,7 +95,7 @@ export class SyncService {
           });
         }
 
-        const posts: Post[] = items.map((item) => ({
+        const posts: Prisma.PostUpdateInput[] = items.map((item) => ({
           ...blog.mapper(item),
           postId: `${blogKey}#${item.guid}`,
           publicationId: pub.id,
@@ -109,5 +111,32 @@ export class SyncService {
         this.logger.error(error);
       }
     }
+
+    await this.syncPostImages();
+  }
+
+  private async syncPostImages(): Promise<void> {
+    let posts = await this.postService.getPostsWithoutImages();
+
+    this.logger.log(`${posts.length} don't have any images...`);
+
+    try {
+      const images = await Promise.all(
+        posts.map((item) =>
+          this.postImageService.getPostImageUrl(item.link).catch(() => null),
+        ),
+      );
+
+      posts = posts.map((item, index) => ({
+        ...item,
+        imageUrl: images[index],
+      }));
+
+      this.logger.log(`Image fetch complete...`);
+    } catch (err) {
+      this.logger.error(`Unable to fetch images...`);
+    }
+
+    await this.postService.updatePostImages(posts);
   }
 }

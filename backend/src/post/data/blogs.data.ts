@@ -6,7 +6,7 @@ function extractCommonFieldsFromRSS({
   guid,
   pubDate,
   link,
-}: any): Omit<Post, 'postId' | 'publicationId'> {
+}: any): Omit<Post, 'postId' | 'publicationId' | 'imageUrl'> {
   return {
     guid,
     title,
@@ -22,7 +22,7 @@ export interface BlogSource {
   link: string;
   description: string;
   feedUrl: string;
-  mapper: (arg: any) => Omit<Post, 'postId' | 'publicationId'>;
+  mapper: (arg: any) => Omit<Post, 'postId' | 'publicationId' | 'imageUrl'>;
   [key: string]: any;
   isPaged: boolean;
   startPage?: number;
