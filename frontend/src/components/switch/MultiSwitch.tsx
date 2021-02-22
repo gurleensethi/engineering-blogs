@@ -31,7 +31,7 @@ const MultiSwitch: FC<MultiSwitchProps> = ({
         setSelectedOption: onOptionSelect,
       }}
     >
-      <div className={`${className} flex w-full sm:justify-end`} {...rest}>
+      <div className={`${className} flex w-full`} {...rest}>
         {children}
       </div>
     </MultiSwitchContext.Provider>
@@ -45,7 +45,7 @@ export const MultiSwitchItem: FC<Option> = ({ id, name }) => {
   return (
     <div
       key={id}
-      className="flex-col justify-center items-center cursor-pointer px-4 py-2"
+      className="flex-col justify-center items-center cursor-pointer py-2 pr-4"
       onClick={() => setSelectedOption(id)}
       onFocus={() => console.log("onFocus")}
       onBlur={() => console.log("onBlur")}

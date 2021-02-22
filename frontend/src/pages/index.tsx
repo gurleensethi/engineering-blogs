@@ -89,7 +89,7 @@ const Index: React.FC<Props> = ({
         onTextReset={onSearchReset}
       />
       <MultiSwitch
-        className="my-2"
+        className="my-4"
         selectedId={feed}
         onOptionSelect={handleFeedSelect}
       >
@@ -108,7 +108,7 @@ const Index: React.FC<Props> = ({
 
           return (
             <li
-              className="ring-1 ring-gray-200 dark:ring-gray-500 rounded-md mb-8 transition hover:shadow-xl dark:hover:bg-gray-800 cursor-pointer w-full sm:w-custom/48"
+              className="ring-1 ring-gray-200 dark:ring-gray-500 rounded-md overflow-hidden mb-8 transition hover:shadow-xl dark:hover:bg-gray-800 cursor-pointer w-full sm:w-custom/48"
               key={item.guid}
             >
               <a
@@ -117,27 +117,47 @@ const Index: React.FC<Props> = ({
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <div className="p-4 flex flex-col h-full">
-                  <div className="flex w-full mb-2 align-middle">
-                    <div
-                      className={`${flairColor} font-semibold tracking-wide px-2 py-1 text-xs rounded`}
-                      onClick={(event) => {
-                        event.preventDefault();
-                        event.stopPropagation();
-                        handlePublicationClick(item.publicationId);
-                      }}
-                    >
-                      {item.publication.name}
+                <div>
+                  <img
+                    src={item.imageUrl || "/images/logo.png"}
+                    className="w-full h-40 object-cover"
+                    height="10"
+                    width="10"
+                    onError={function (event) {
+                      console.log(event.target);
+                      (event.target as HTMLImageElement).src =
+                        "/images/logo.png";
+                      (event.target as HTMLImageElement).classList.remove(
+                        "object-cover"
+                      );
+                      (event.target as HTMLImageElement).classList.add(
+                        "object-contain"
+                      );
+                      (event.target as HTMLImageElement).classList.add("p-12");
+                    }}
+                  />
+                  <div className="p-4 flex flex-col h-full">
+                    <div className="flex w-full mb-2 align-middle">
+                      <div
+                        className={`${flairColor} font-semibold tracking-wide px-2 py-1 text-xs rounded`}
+                        onClick={(event) => {
+                          event.preventDefault();
+                          event.stopPropagation();
+                          handlePublicationClick(item.publicationId);
+                        }}
+                      >
+                        {item.publication.name}
+                      </div>
+                      <div className="text-xs text-gray-500 dark:text-gray-400 flex-1 text-right">
+                        {format(new Date(item.pubDate), "dd-MMM-yyyy")}
+                      </div>
                     </div>
-                    <div className="text-xs text-gray-500 dark:text-gray-400 flex-1 text-right">
-                      {format(new Date(item.pubDate), "dd-MMM-yyyy")}
+                    <div className="mb-2 text-lg text-gray-700 dark:text-gray-100 font-medium">
+                      {item.title}
                     </div>
-                  </div>
-                  <div className="mb-2 text-lg text-gray-700 dark:text-gray-100 font-medium">
-                    {item.title}
-                  </div>
-                  <div className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                    {shortenText(item.description)}
+                    <div className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                      {shortenText(item.description)}
+                    </div>
                   </div>
                 </div>
               </a>

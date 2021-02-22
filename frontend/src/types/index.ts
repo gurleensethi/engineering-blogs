@@ -6,6 +6,7 @@ export interface Post {
   pubDate: string;
   link: string;
   publicationId: string;
+  imageUrl: string | null;
   publication: {
     id: string;
     name: string;
