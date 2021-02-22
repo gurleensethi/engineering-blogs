@@ -34,7 +34,7 @@ export const Page: FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <div className={`${darkMode.isEnabled ? "dark" : ""}`}>
       <div className="h-screen w-screen">
-        <div className="fixed">
+        <div className="fixed z-50">
           <TopBar />
         </div>
         <TopBarLoading isLoading={isLoading} />

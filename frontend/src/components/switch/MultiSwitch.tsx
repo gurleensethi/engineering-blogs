@@ -47,15 +47,21 @@ export const MultiSwitchItem: FC<Option> = ({ id, name }) => {
       key={id}
       className="flex-col justify-center items-center cursor-pointer px-4 py-2"
       onClick={() => setSelectedOption(id)}
+      onFocus={() => console.log("onFocus")}
+      onBlur={() => console.log("onBlur")}
     >
       <div
         className={`transition ${
-          isOptionSelected ? "text-gray-700" : "text-gray-400"
+          isOptionSelected
+            ? "text-gray-700 dark:text-gray-100"
+            : "text-gray-400 dark:text-gray-400"
         }`}
       >
         {name}
       </div>
-      {isOptionSelected && <div className="h-0.5 bg-gray-700 w-full fade-in" />}
+      {isOptionSelected && (
+        <div className="h-0.5 bg-gray-700 dark:bg-gray-100 w-full fade-in" />
+      )}
     </div>
   );
 };

@@ -23,7 +23,7 @@ body {
 }
 
 .enter-top {
-  animation: enter-top;
+  animation: enter-top 0.3s;
 }
 
 @keyframes fade-in {
@@ -38,10 +38,12 @@ body {
 
 @keyframes enter-top {
   from {
-    transform: translateY(-100px);
+    transform: translateY(-10px);
+    opacity: 0.5;
   }
 
   to {
     transform: translateY(0px);
+    opacity: 1;
   }
 }

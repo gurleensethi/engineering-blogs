@@ -97,6 +97,7 @@ const Index: React.FC<Props> = ({
         <Tooltip
           visible={showLoginTooltip}
           text="Please login to access My Feed. Click on 'Login with GitHub' in the menu."
+          onClose={() => setShowLoginTooltip(false)}
         >
           <MultiSwitchItem id="my_feed" name="My Feed" />
         </Tooltip>

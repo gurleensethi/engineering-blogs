@@ -1,22 +1,31 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import { UserContext } from "../context/UserProvider";
 import useBreakpoint from "../hooks/useBreakpoint";
 import TopBarLink from "./TopBarLink";
 import Image from "next/image";
 import { DarkModeContext } from "../context/DarkMode";
 import ThemeToggleButton from "./buttons/ThemeToggleButton";
+import useClickAway from "../hooks/useClickAway";
 
 export default function TopBar() {
   const router = useRouter();
   const [isDropDownOpen, setDropDownOpen] = React.useState(false);
+  const menuRef = useRef<HTMLDivElement | null>(null);
+  const menuButtonRef = useRef<HTMLButtonElement | null>(null);
   const userContext = useContext(UserContext);
   const darkMode = useContext(DarkModeContext);
 
   const toggleDropDown = () => {
     setDropDownOpen((value) => !value);
   };
+
+  useClickAway<HTMLElement>(
+    [menuRef, menuButtonRef],
+    () => setDropDownOpen(false),
+    isDropDownOpen
+  );
 
   const isSmall = useBreakpoint("sm");
 
@@ -44,7 +53,11 @@ export default function TopBar() {
         onClick={() => darkMode.toggle()}
       />
       <div>
-        <div onClick={toggleDropDown} className="sm:hidden">
+        <button
+          onClick={toggleDropDown}
+          className="outline-none focus:outline-none sm:hidden"
+          ref={menuButtonRef}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -61,9 +74,12 @@ export default function TopBar() {
               d="M4 6h16M4 12h16m-7 6h7"
             />
           </svg>
-        </div>
+        </button>
         {(isDropDownOpen || isSmall) && (
-          <div className="bg-white dark:bg-black absolute left-0 right-0 top-full m-2 rounded-md p-2 shadow-lg sm:flex sm:items-center sm:relative sm:left-auto sm:top-auto sm:right-auto sm:shadow-none sm:m-0 sm:p-0">
+          <div
+            ref={menuRef}
+            className="enter-top bg-white dark:bg-black absolute left-0 right-0 top-full m-2 rounded-md p-2 shadow-lg sm:flex sm:items-center sm:relative sm:left-auto sm:top-auto sm:right-auto sm:shadow-none sm:m-0 sm:p-0"
+          >
             <TopBarLink
               href="/"
               isActive={router.pathname === "/"}

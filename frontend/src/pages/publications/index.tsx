@@ -42,6 +42,7 @@ const Publications: FC<Props> = ({ publications }) => {
         onTextChange={handleOnSearchChange}
         text={searchText}
         onTextReset={resetSearch}
+        className="mb-8"
       />
       <ul className="sm:flex sm:flex-wrap sm:justify-between">
         {publications
