@@ -7,9 +7,9 @@
     "build": "next build",
     "start": "next start",
     "heroku:start": "next start -p $PORT",
-    "heroku:docker:build": "docker build -t registry.heroku.com/engineering-blogs/web .",
-    "heroku:push": "docker push registry.heroku.com/engineering-blogs/web",
-    "heroku:release": "heroku container:release web --app engineering-blogs",
+    "heroku:docker:build": "docker build -t registry.heroku.com/engineeringblogs/web .",
+    "heroku:push": "docker push registry.heroku.com/engineeringblogs/web",
+    "heroku:release": "heroku container:release web --app engineeringblogs",
     "heroku:deploy": "npm run heroku:docker:build && npm run heroku:push && npm run heroku:release"
   },
   "dependencies": {
