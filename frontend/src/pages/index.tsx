@@ -121,8 +121,7 @@ const Index: React.FC<Props> = ({
                   <img
                     src={item.imageUrl || "/images/logo.png"}
                     className="w-full h-40 object-cover"
-                    height="10"
-                    width="10"
+                    loading="lazy"
                     onError={function (event) {
                       const imgElement: HTMLImageElement = event.target as HTMLImageElement;
                       imgElement.src = "/images/logo.png";

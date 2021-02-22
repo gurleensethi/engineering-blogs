@@ -23,7 +23,7 @@ const TopBarLoading: React.FC<Props> = ({ isLoading }) => {
   }, [isLoading]);
 
   return (
-    <div className="fixed w-full">
+    <div className="fixed w-full z-50">
       <div
         className={`bg-blue-500 rounded-r-xl opacity-0 transition ${
           isLoading ? "opacity-100" : ""
