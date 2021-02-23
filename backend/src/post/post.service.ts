@@ -1,5 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { Post, Prisma } from '@prisma/client';
+import { Post, Prisma, User } from '@prisma/client';
 import { PrismaService } from 'src/database/prisma.service';
 import { PaginatedResult } from 'src/types';
 import { CreatePostDto } from './dto/create-post.dto';
@@ -61,6 +61,38 @@ export class PostService {
       pageNumber,
       hasNextPage: results.length >= POST_PAGE_SIZE,
       data: results,
+    };
+  }
+
+  public async getMyFeedPosts(
+    user: User,
+    pageNumber: number,
+  ): Promise<PaginatedResult<Post>> {
+    const publicationsIds: string[] = await this.prismaService.userPublication
+      .findMany({ where: { userId: user.id }, select: { publicationId: true } })
+      .then((data) => data.map((item) => item.publicationId));
+
+    if (!publicationsIds.length) {
+      return {
+        pageNumber,
+        data: [],
+        hasNextPage: false,
+      };
+    }
+
+    const itemsToSkip = POST_PAGE_SIZE * pageNumber;
+
+    const posts = await this.prismaService.post.findMany({
+      where: { publicationId: { in: publicationsIds } },
+      include: { publication: true },
+      skip: itemsToSkip,
+      take: POST_PAGE_SIZE,
+    });
+
+    return {
+      pageNumber,
+      data: posts,
+      hasNextPage: posts.length === POST_PAGE_SIZE,
     };
   }
 
