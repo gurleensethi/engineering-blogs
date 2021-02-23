@@ -4,12 +4,23 @@ import { PaginatedResult, Post } from "../types";
 
 const { BACKEND_URL } = process.env;
 
+interface AllPostFilters {
+  page?: number | string;
+  publicationIds?: string;
+  search?: string;
+}
+
+interface MyFeedFilters {
+  page?: number | string;
+  authToken: string;
+}
+
 export async function getAllPosts(
-  filters: {
-    page?: number | string;
-    publicationIds?: string;
-    search?: string;
-  } = { page: 0, publicationIds: undefined, search: undefined }
+  filters: AllPostFilters = {
+    page: 0,
+    publicationIds: undefined,
+    search: undefined,
+  }
 ): Promise<PaginatedResult<Post>> {
   const { page, publicationIds, search } = filters;
 
@@ -20,6 +31,23 @@ export async function getAllPosts(
 
   const { data } = await axios.get(`${BACKEND_URL}/posts`, {
     params,
+  });
+
+  return data;
+}
+
+export async function getMyFeedPost(
+  filters: MyFeedFilters
+): Promise<PaginatedResult<Post>> {
+  const { page = 0, authToken } = filters;
+
+  const params = {};
+
+  addPropertyIfNotExists(params, "page", page);
+
+  const { data } = await axios.get(`${BACKEND_URL}/posts/feed`, {
+    params,
+    headers: { Authorization: authToken },
   });
 
   return data;
