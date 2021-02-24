@@ -12,6 +12,7 @@ import Tooltip from "../components/tooltip/Tooltip";
 import { UserContext } from "../context/UserProvider";
 import PostItem from "../components/PostItem";
 import usePropChanged from "../hooks/usePropChanged";
+import SimpleDialog from "../components/dialog/SimpleDialog";
 
 type Props = {
   posts: Post[];
@@ -40,6 +41,7 @@ const Index: React.FC<Props> = ({
   feed,
 }) => {
   const [postFeed, setPostFeed] = useState(feed);
+  const [isFeedDialogOpen, setFeedDialogOpen] = useState(false);
   const [searchText, setSearchText] = useState(search || "");
   const [showLoginTooltip, setShowLoginTooltip] = useState(false);
   const router = useRouter();
@@ -85,6 +87,10 @@ const Index: React.FC<Props> = ({
     router.push({ href: router.route, query: { feed: id } });
   };
 
+  const handleOpenFeedDialog = () => {
+    setFeedDialogOpen(true);
+  };
+
   return (
     <Layout
       title="Posts | Engineering Blogs"
@@ -106,7 +112,17 @@ const Index: React.FC<Props> = ({
           text="Please login to access My Feed. Click on 'Login with GitHub' in the menu."
           onClose={() => setShowLoginTooltip(false)}
         >
-          <MultiSwitchItem id="my_feed" name="My Feed" />
+          <div className="flex items-center">
+            <MultiSwitchItem id="my_feed" name="My Feed" />
+            {postFeed === FeedType.MY_FEED && (
+              <button
+                className="text-blue-500 hover:text-blue-700 cursor-pointer outline-none focus:outline-none"
+                onClick={handleOpenFeedDialog}
+              >
+                (customize)
+              </button>
+            )}
+          </div>
         </Tooltip>
       </MultiSwitch>
       <ul className="inline-flex flex-wrap justify-between">
@@ -120,8 +136,13 @@ const Index: React.FC<Props> = ({
           );
         })}
         {!posts.length && postFeed === FeedType.MY_FEED && (
-          <div className="text-xl text-gray-500">
-            Your feed is empty! &#128558;
+          <div className="flex-col justify-center">
+            <div className="text-xl text-gray-500 dark:text-gray-200">
+              Your feed is empty! &#128558;
+            </div>
+            <button className="btn mt-4" onClick={handleOpenFeedDialog}>
+              Customize Feed
+            </button>
           </div>
         )}
       </ul>
@@ -148,6 +169,12 @@ const Index: React.FC<Props> = ({
           </Link>
         )}
       </div>
+      <SimpleDialog
+        isOpen={isFeedDialogOpen}
+        onClose={() => setFeedDialogOpen(false)}
+      >
+        <>Coming soon!</>
+      </SimpleDialog>
     </Layout>
   );
 };

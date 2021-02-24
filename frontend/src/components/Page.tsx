@@ -2,8 +2,8 @@ import { AppProps } from "next/dist/next-server/lib/router/router";
 import { Router } from "next/router";
 import React, { FC, useContext, useEffect, useState } from "react";
 import { DarkModeContext } from "../context/DarkMode";
-import TopBar from "./TopBar";
-import TopBarLoading from "./TopBarLoading";
+import TopBar from "./topbar/TopBar";
+import TopBarLoading from "./topbar/TopBarLoading";
 
 export const Page: FC<AppProps> = ({ Component, pageProps }) => {
   const [isLoading, setLoading] = useState(false);

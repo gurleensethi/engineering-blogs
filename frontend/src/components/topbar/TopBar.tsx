@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useContext, useRef } from "react";
-import { UserContext } from "../context/UserProvider";
-import useBreakpoint from "../hooks/useBreakpoint";
+import { UserContext } from "../../context/UserProvider";
+import useBreakpoint from "../../hooks/useBreakpoint";
 import TopBarLink from "./TopBarLink";
 import Image from "next/image";
-import { DarkModeContext } from "../context/DarkMode";
-import ThemeToggleButton from "./buttons/ThemeToggleButton";
-import useClickAway from "../hooks/useClickAway";
+import { DarkModeContext } from "../../context/DarkMode";
+import ThemeToggleButton from "../buttons/ThemeToggleButton";
+import useClickAway from "../../hooks/useClickAway";
 
 export default function TopBar() {
   const router = useRouter();

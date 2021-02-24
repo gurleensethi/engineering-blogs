@@ -27,9 +27,11 @@ const PostItem: React.FC<Props> = ({ post, onPublicationClick, ...rest }) => {
         <div>
           <img
             src={post.imageUrl || "/images/logo.png"}
-            className="w-full h-40 object-cover"
-            loading="lazy"
+            className={`w-full h-40 ${
+              !!post.imageUrl ? "object-cover" : "object-contain p-12"
+            }`}
             onError={function (event) {
+              console.log("error");
               const imgElement: HTMLImageElement = event.target as HTMLImageElement;
               imgElement.src = "/images/logo.png";
               imgElement.classList.remove("object-cover");
