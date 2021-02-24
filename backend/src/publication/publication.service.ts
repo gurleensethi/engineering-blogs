@@ -7,7 +7,7 @@ export class PublicationService {
   constructor(private prismaService: PrismaService) {}
 
   public async getAllPublications(): Promise<Publication[]> {
-    return this.prismaService.publication.findMany();
+    return this.prismaService.publication.findMany({ orderBy: { id: 'asc' } });
   }
 
   public async getPublication(id: string): Promise<Publication | undefined> {

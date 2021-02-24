@@ -258,4 +258,35 @@ export default <{ [key: string]: BlogSource }>{
       };
     },
   },
+  mongoDB: {
+    name: 'MongoDB',
+    blogName: 'The MongoDB Engineering Journal',
+    link: 'https://engineering.mongodb.com',
+    description:
+      'The MongoDB Engineering Journal: a tech blog for builders, by builders. Here we chronicle our achievements and lessons learned.',
+    feedUrl: 'https://engineering.mongodb.com/post?format=rss',
+    isPaged: true,
+    getNextPage: (page) => page + 1,
+    getNextPageLink: (pageNumber) =>
+      `https://engineering.mongodb.com/post?format=rss&page=${pageNumber + 1}`,
+    mapper: (rawJson: any) => {
+      return {
+        ...extractCommonFieldsFromRSS(rawJson),
+      };
+    },
+  },
+  sentry: {
+    name: 'Sentry',
+    blogName: 'Sentry Blog',
+    link: 'https://blog.sentry.io/',
+    description:
+      'Product, Engineering, and Marketing updates from the developers of Sentry.',
+    feedUrl: 'https://blog.sentry.io/feed.xml',
+    isPaged: false,
+    mapper: (rawJson: any) => {
+      return {
+        ...extractCommonFieldsFromRSS(rawJson),
+      };
+    },
+  },
 };

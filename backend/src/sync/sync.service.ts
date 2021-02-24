@@ -34,7 +34,7 @@ export class SyncService {
     return {
       publication: {
         blogName: channel.title,
-        description: channel.description,
+        description: htmlToText(channel.description),
         link: channel.link,
       },
       items: channel.item.map((item) => ({
