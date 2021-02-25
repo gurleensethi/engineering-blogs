@@ -38,7 +38,7 @@ const PublicationsEditor: FC = () => {
   }
 
   return (
-    <div>
+    <div className="overflow-auto">
       <div className="underline text-gray-700 text-md tracking-wider mb-4">
         My Feed
       </div>
@@ -55,7 +55,9 @@ const PublicationsEditor: FC = () => {
       </div>
       <div>
         {allPubs?.data?.map((item) => (
-          <div key={item.id}>{item.name}</div>
+          <div className="mt-10" key={item.id}>
+            {item.name}
+          </div>
         ))}
       </div>
     </div>
