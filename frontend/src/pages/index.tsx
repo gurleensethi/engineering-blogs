@@ -29,10 +29,6 @@ type Query = {
   feed?: string;
 };
 
-const getPubIdsAsQuery = (ids?: string): string => {
-  return !!ids ? `&publicationIds=${ids}` : "";
-};
-
 const Index: React.FC<Props> = ({
   posts,
   pageNumber,
@@ -116,7 +112,7 @@ const Index: React.FC<Props> = ({
             <MultiSwitchItem id="my_feed" name="My Feed" />
             {postFeed === FeedType.MY_FEED && (
               <button
-                className="text-blue-500 hover:text-blue-700 cursor-pointer outline-none focus:outline-none"
+                className="text-blue-500 hover:text-blue-700 dark:text-blue-300 dark:hover:text-blue-500 cursor-pointer outline-none focus:outline-none"
                 onClick={handleOpenFeedDialog}
               >
                 (customize)
@@ -135,17 +131,18 @@ const Index: React.FC<Props> = ({
             />
           );
         })}
-        {!posts.length && postFeed === FeedType.MY_FEED && (
-          <div className="flex-col justify-center">
-            <div className="text-xl text-gray-500 dark:text-gray-200">
-              Your feed is empty! &#128558;
-            </div>
-            <button className="btn mt-4" onClick={handleOpenFeedDialog}>
-              Customize Feed
-            </button>
-          </div>
-        )}
       </ul>
+      {!posts.length && postFeed === FeedType.MY_FEED && (
+        <div className="flex flex-col items-center h-full w-full mt-8">
+          <div className="text-6xl">&#128558;</div>
+          <div className="text-xl text-gray-500 mt-4 dark:text-gray-200">
+            Your feed is empty
+          </div>
+          <button className="btn mt-16" onClick={handleOpenFeedDialog}>
+            Customize Feed
+          </button>
+        </div>
+      )}
       <div className="p-6 flex w-full">
         {pageNumber > 0 && (
           <Link
