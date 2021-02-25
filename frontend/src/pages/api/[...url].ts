@@ -9,8 +9,6 @@ const apiProxy = createProxyMiddleware({
   changeOrigin: true,
   pathRewrite: { "^/api/": "/" },
   onProxyReq: (req) => {
-    console.log(BACKEND_URL);
-    console.log(req.host, req.path);
     const cookieHeader = req.getHeader("cookie") as string;
     const parsedCookies = cookie.parse(cookieHeader || "");
     req.setHeader("authorization", parsedCookies["auth.access_token"] || null);

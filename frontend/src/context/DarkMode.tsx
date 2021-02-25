@@ -1,4 +1,4 @@
-import { createContext, FC, useMemo, useState } from "react";
+import { createContext, FC, useMemo } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
 
 type DarkModeData = { isEnabled: boolean; toggle: () => void };
