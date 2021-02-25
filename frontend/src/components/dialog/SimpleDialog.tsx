@@ -17,7 +17,7 @@ const SimpleDialog: FC<Props> = ({ isOpen, children, onClose }) => {
 
   return (
     <div
-      className="fade-in enter-top transition-opacity fixed bg-gray-700 bg-opacity-30 top-0 bottom-0 left-0 right-0 z-50"
+      className="transition-opacity fixed bg-gray-700 bg-opacity-30 top-0 bottom-0 left-0 right-0 z-50"
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -25,7 +25,7 @@ const SimpleDialog: FC<Props> = ({ isOpen, children, onClose }) => {
       }}
     >
       <div
-        className="flex-col bg-white dark:bg-gray-900 absolute top-0 bottom-0 left-0 right-0 p-4 sm:p-8 m-8 sm:m-16 rounded-lg shadow-xl"
+        className="zoom-in fade-in flex-col bg-white dark:bg-gray-900 absolute top-0 bottom-0 left-0 right-0 p-4 sm:p-8 m-8 sm:m-16 rounded-lg shadow-xl"
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();

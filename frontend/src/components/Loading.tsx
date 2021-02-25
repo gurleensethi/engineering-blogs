@@ -1,9 +1,16 @@
 import { FC } from "react";
 
-const Loading: FC = () => {
+type Props = { size?: number };
+
+const Loading: FC<Props> = ({ size }) => {
+  const loadingSize = size || 3;
+  const boundarySize = loadingSize + 1;
+
   return (
-    <div className="animate-spin w-4 h-4 bg-gray-500 flex justify-center items-center">
-      <div className="w-3 h-3 bg-white" />
+    <div
+      className={`animate-spin w-${boundarySize} h-${boundarySize} bg-gray-500 flex justify-center items-center`}
+    >
+      <div className={`w-${loadingSize} h-${loadingSize} bg-white`} />
     </div>
   );
 };

@@ -13,6 +13,7 @@ import { UserContext } from "../context/UserProvider";
 import PostItem from "../components/PostItem";
 import usePropChanged from "../hooks/usePropChanged";
 import SimpleDialog from "../components/dialog/SimpleDialog";
+import PublicationsEditor from "../components/compound/PublicationsEditor";
 
 type Props = {
   posts: Post[];
@@ -170,7 +171,7 @@ const Index: React.FC<Props> = ({
         isOpen={isFeedDialogOpen}
         onClose={() => setFeedDialogOpen(false)}
       >
-        <>Coming soon!</>
+        <PublicationsEditor />
       </SimpleDialog>
     </Layout>
   );

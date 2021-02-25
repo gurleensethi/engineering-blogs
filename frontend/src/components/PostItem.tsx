@@ -31,7 +31,6 @@ const PostItem: React.FC<Props> = ({ post, onPublicationClick, ...rest }) => {
               !!post.imageUrl ? "object-cover" : "object-contain p-12"
             }`}
             onError={function (event) {
-              console.log("error");
               const imgElement: HTMLImageElement = event.target as HTMLImageElement;
               imgElement.src = "/images/logo.png";
               imgElement.classList.remove("object-cover");
