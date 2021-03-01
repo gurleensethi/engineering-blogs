@@ -30,9 +30,13 @@ export const getServerSideProps: GetServerSideProps = async ({
     };
   }
 
+  const date = new Date(Date.now() + 2592000000);
+
   res.setHeader(
     "Set-Cookie",
-    `auth.access_token=${user.data.accessToken}; Path=/; HttpOnly; SameSite=Lax`
+    `auth.access_token=${
+      user.data.accessToken
+    }; Path=/; HttpOnly; SameSite=Lax; Expires=${date.toUTCString()}`
   );
 
   return {
