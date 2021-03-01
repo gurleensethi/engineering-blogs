@@ -87,6 +87,9 @@ export class PostService {
       include: { publication: true },
       skip: itemsToSkip,
       take: POST_PAGE_SIZE,
+      orderBy: {
+        pubDate: 'desc',
+      },
     });
 
     return {
