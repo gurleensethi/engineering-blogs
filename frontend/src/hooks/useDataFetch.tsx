@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 
 function useDataFetch<T>(
-  fetchCallback: () => Promise<Response>
+  fetchCallback: () => Promise<Response>,
+  options: { onSuccess?: (data: T) => void } = {}
 ): {
   isLoading: boolean;
   data: T | null;
@@ -24,6 +25,10 @@ function useDataFetch<T>(
       })
       .then((payload) => {
         setData(payload);
+
+        if (options.onSuccess) {
+          options.onSuccess(payload);
+        }
       })
       .catch((err) => {
         setError(error);

@@ -41,6 +41,7 @@ const Index: React.FC<Props> = ({
   const [isFeedDialogOpen, setFeedDialogOpen] = useState(false);
   const [searchText, setSearchText] = useState(search || "");
   const [showLoginTooltip, setShowLoginTooltip] = useState(false);
+  const [arePublicationsEdited, setPublicationsEdited] = useState(false);
   const router = useRouter();
   const [searchDebounce] = useDebounce(500);
   const user = useContext(UserContext);
@@ -85,7 +86,15 @@ const Index: React.FC<Props> = ({
   };
 
   const handleOpenFeedDialog = () => {
+    setPublicationsEdited(false);
     setFeedDialogOpen(true);
+  };
+
+  const handlePublicationEditorClose = () => {
+    setFeedDialogOpen(false);
+    if (arePublicationsEdited) {
+      router.replace({ href: "/", query: { ...router.query } });
+    }
   };
 
   return (
@@ -169,9 +178,11 @@ const Index: React.FC<Props> = ({
       </div>
       <SimpleDialog
         isOpen={isFeedDialogOpen}
-        onClose={() => setFeedDialogOpen(false)}
+        onClose={() => handlePublicationEditorClose()}
       >
-        <PublicationsEditor />
+        <PublicationsEditor
+          onPublicationsModified={() => setPublicationsEdited(true)}
+        />
       </SimpleDialog>
     </Layout>
   );
