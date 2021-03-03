@@ -289,4 +289,30 @@ export default <{ [key: string]: BlogSource }>{
       };
     },
   },
+  gojek: {
+    name: 'Gojek',
+    blogName: 'Gojek Product + Tech - Medium',
+    link: 'https://blog.gojekengineering.com',
+    description: "Gojek's Product and Engineering Blog - Medium",
+    feedUrl: 'https://blog.gojekengineering.com/feed',
+    isPaged: false,
+    mapper: (rawJson: any) => {
+      return {
+        ...extractCommonFieldsFromRSS(rawJson),
+      };
+    },
+  },
+  stripe: {
+    name: 'Stripe',
+    blogName: 'Stripe Blog',
+    link: 'https://stripe.com/blog',
+    description: 'The Stripe Blog',
+    feedUrl: 'https://stripe.com/blog/feed.rss',
+    isPaged: false,
+    mapper: (rawJson: any) => {
+      return {
+        ...extractCommonFieldsFromRSS(rawJson),
+      };
+    },
+  },
 };
