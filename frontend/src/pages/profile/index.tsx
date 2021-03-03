@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FC, useContext } from "react";
+import { SubmitPublicationForm } from "../../components/compound/SubmitPublicationForm";
 import Layout from "../../components/Layout";
 import Loading from "../../components/Loading";
 import { UserContext } from "../../context/UserProvider";
@@ -43,6 +44,7 @@ const Profile: FC = () => {
       <a className="btn" href="/logout">
         Logout
       </a>
+      <SubmitPublicationForm className="mt-16" />
     </Layout>
   );
 };
