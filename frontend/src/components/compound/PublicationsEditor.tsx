@@ -8,6 +8,7 @@ type Props = { onPublicationsModified: () => void };
 
 const PublicationsEditor: FC<Props> = ({ onPublicationsModified }) => {
   const [selectedPubIds, setSelectedPubIds] = useState<Set<string>>(new Set());
+  const [loadingIds, setLoadingIds] = useState<Set<string>>(new Set());
 
   const userPub = useDataFetch<Publication[]>(
     () => fetch("/api/users/publications"),
@@ -24,7 +25,18 @@ const PublicationsEditor: FC<Props> = ({ onPublicationsModified }) => {
     allPubs.retry();
   };
 
+  const addToLoadingIds = (id: string) => {
+    const newIds = new Set([...loadingIds, id]);
+    setLoadingIds(newIds);
+  };
+
+  const removeFromLoadingIds = (id: string) => {
+    const newIds = new Set([...loadingIds].filter((item) => item != id));
+    setLoadingIds(newIds);
+  };
+
   const handlePublicationClick = (publication: Publication) => {
+    addToLoadingIds(publication.id);
     const isInMyFeed = selectedPubIds.has(publication.id);
 
     axios({
@@ -46,7 +58,10 @@ const PublicationsEditor: FC<Props> = ({ onPublicationsModified }) => {
           );
         }
       })
-      .catch((err) => {});
+      .catch((err) => {})
+      .finally(() => {
+        removeFromLoadingIds(publication.id);
+      });
   };
 
   if (userPub.isLoading || allPubs.isLoading) {
@@ -82,8 +97,9 @@ const PublicationsEditor: FC<Props> = ({ onPublicationsModified }) => {
         (Click on a publication to add it in your feed)
       </div>
       <div>
-        {allPubs?.data?.map((item) => {
-          const isSelected = selectedPubIds.has(item.id);
+        {allPubs?.data?.map((publication) => {
+          const isSelected = selectedPubIds.has(publication.id);
+          const isLoading = loadingIds.has(publication.id);
 
           return (
             <div
@@ -92,11 +108,12 @@ const PublicationsEditor: FC<Props> = ({ onPublicationsModified }) => {
                   ? "bg-blue-500 text-white ring-blue-500"
                   : "text-gray-700 ring-gray-300 dark:text-gray-200"
               }`}
-              key={item.id}
-              onClick={() => handlePublicationClick(item)}
+              key={publication.id}
+              onClick={() => handlePublicationClick(publication)}
             >
-              <div className="flex-grow">{item.name}</div>
-              {isSelected && (
+              <div className="flex-grow">{publication.name}</div>
+              {isLoading && <Loading size={3} className="mr-2" />}
+              {!isLoading && isSelected && (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

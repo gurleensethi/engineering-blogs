@@ -1,17 +1,20 @@
 import { useState, useEffect } from "react";
 
-function useDataFetch<T>(
+function useDataFetch<ProcessedData, RawData = any>(
   fetchCallback: () => Promise<Response>,
-  options: { onSuccess?: (data: T) => void } = {}
+  options: {
+    onSuccess?: (data: ProcessedData) => void;
+    process?: (data: RawData) => ProcessedData;
+  } = {}
 ): {
   isLoading: boolean;
-  data: T | null;
+  data: ProcessedData | null;
   error: Error | null;
   retry: () => void;
 } {
   const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
-  const [data, setData] = useState<T>();
+  const [data, setData] = useState<ProcessedData>();
 
   function fetchData() {
     setLoading(true);
@@ -24,7 +27,11 @@ function useDataFetch<T>(
         return Promise.reject();
       })
       .then((payload) => {
-        setData(payload);
+        const processedData = options.process
+          ? options.process(payload)
+          : payload;
+
+        setData(processedData);
 
         if (options.onSuccess) {
           options.onSuccess(payload);
