@@ -26,13 +26,15 @@ const PublicationsEditor: FC<Props> = ({ onPublicationsModified }) => {
   };
 
   const addToLoadingIds = (id: string) => {
-    const newIds = new Set([...loadingIds, id]);
-    setLoadingIds(newIds);
+    setLoadingIds((ids) => {
+      return new Set([...loadingIds, id]);
+    });
   };
 
   const removeFromLoadingIds = (id: string) => {
-    const newIds = new Set([...loadingIds].filter((item) => item != id));
-    setLoadingIds(newIds);
+    setLoadingIds((ids) => {
+      return new Set([...ids].filter((item) => item != id));
+    });
   };
 
   const handlePublicationClick = (publication: Publication) => {
