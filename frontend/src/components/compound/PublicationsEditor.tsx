@@ -66,10 +66,10 @@ const PublicationsEditor: FC<Props> = ({ onPublicationsModified }) => {
       });
   };
 
-  if (userPub.isLoading || allPubs.isLoading) {
+  if (!userPub.isLoading || allPubs.isLoading) {
     return (
       <div className="flex justify-center items-center h-full w-full">
-        <Loading size={4} />
+        <Loading size={3} />
         <p className="ml-4 text-gray-700 text-xl dark:text-white">
           Bringing publications...
         </p>
@@ -114,7 +114,13 @@ const PublicationsEditor: FC<Props> = ({ onPublicationsModified }) => {
               onClick={() => handlePublicationClick(publication)}
             >
               <div className="flex-grow">{publication.name}</div>
-              {isLoading && <Loading size={3} className="mr-2" />}
+              {isLoading && (
+                <Loading
+                  size={3}
+                  className={`mr-2`}
+                  progressColor={isSelected && "border-white"}
+                />
+              )}
               {!isLoading && isSelected && (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
