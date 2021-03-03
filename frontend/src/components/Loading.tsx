@@ -8,10 +8,10 @@ const Loading: FC<Props> = ({ size }) => {
 
   return (
     <div
-      className={`animate-spin w-${boundarySize} h-${boundarySize} bg-gray-500 flex justify-center items-center`}
-    >
-      <div className={`w-${loadingSize} h-${loadingSize} bg-white`} />
-    </div>
+      className={`animate-spin w-${boundarySize} h-${boundarySize} border-gray-500 border-2 flex justify-center items-center
+      dark:border-white`}
+      style={{ background: "transparent" }}
+    ></div>
   );
 };
 

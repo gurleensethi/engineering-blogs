@@ -52,8 +52,10 @@ const PublicationsEditor: FC<Props> = ({ onPublicationsModified }) => {
   if (userPub.isLoading || allPubs.isLoading) {
     return (
       <div className="flex justify-center items-center h-full w-full">
-        <Loading size={3} />
-        <p className="ml-4 text-gray-700 text-xl">Bringing publications...</p>
+        <Loading size={4} />
+        <p className="ml-4 text-gray-700 text-xl dark:text-white">
+          Bringing publications...
+        </p>
       </div>
     );
   }
