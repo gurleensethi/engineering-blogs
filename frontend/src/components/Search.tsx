@@ -15,7 +15,7 @@ const Search: FC<Props> = ({
 }) => {
   return (
     <div
-      className={`${className} flex items-center transition w-full rounded-md border border-gray-200 dark:border-gray-500 p-2 focus-within:border-gray-400 dark:focus-within:border-gray-200 focus-within:shadow`}
+      className={`${className} flex items-center transition w-full rounded-md ring-2 ring-gray-200 dark:ring-gray-500 p-2 focus-within:ring-gray-400 dark:focus-within:ring-gray-200 focus-within:shadow`}
       {...rest}
     >
       <input

@@ -18,8 +18,8 @@ const TopBarLink: FC<Props> = ({
     <Link href={href}>
       <a
         className={`text-gray-500 dark:text-white cursor-pointer outline-none text-xl sm:text-lg ${
-          isActive ? "" : "opacity-50"
-        } ${className}`}
+          !isActive ? "hover:opacity-80" : ""
+        } ${isActive ? "" : "opacity-50"} ${className}`}
         {...rest}
       >
         <div className="inline-block">
