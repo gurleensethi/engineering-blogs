@@ -66,7 +66,7 @@ const PublicationsEditor: FC<Props> = ({ onPublicationsModified }) => {
       });
   };
 
-  if (!userPub.isLoading || allPubs.isLoading) {
+  if (userPub.isLoading || allPubs.isLoading) {
     return (
       <div className="flex justify-center items-center h-full w-full">
         <Loading size={3} />

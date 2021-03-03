@@ -33,16 +33,16 @@ export default function TopBar() {
     <div className="bg-white dark:bg-black p-4 w-screen shadow-sm flex items-center">
       <div className="flex-1">
         <Link href="/">
-          <a className="text-lg text-gray-700 dark:text-white flex items-center">
+          <a className="text-xl text-gray-700 dark:text-white flex items-center">
             <img
-              height={20}
-              width={20}
+              height={24}
+              width={24}
               src={
                 darkMode.isEnabled
                   ? "/images/logo-white.png"
                   : "/images/logo.png"
               }
-              className="mr-2"
+              className="mr-4"
             />
             Engineering Blogs
           </a>
@@ -51,6 +51,7 @@ export default function TopBar() {
       <ThemeToggleButton
         darkModeEnabled={darkMode.isEnabled}
         onClick={() => darkMode.toggle()}
+        className="mr-8"
       />
       <div>
         <button
@@ -63,7 +64,7 @@ export default function TopBar() {
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            className={`text-gray-500 dark:text-gray-100 w-5 transform transition ${
+            className={`text-gray-500 dark:text-gray-100 h-6 w-6 transform transition ${
               isDropDownOpen ? "rotate-90" : ""
             }`}
           >
@@ -78,27 +79,28 @@ export default function TopBar() {
         {(isDropDownOpen || isSmall) && (
           <div
             ref={menuRef}
-            className="enter-top bg-white dark:bg-black absolute left-0 right-0 top-full m-2 rounded-md p-2 shadow-lg sm:flex sm:items-center sm:relative sm:left-auto sm:top-auto sm:right-auto sm:shadow-none sm:m-0 sm:p-0"
+            className="enter-top bg-white dark:bg-black absolute left-0 right-0 top-full m-2 rounded-md p-4 shadow-lg 
+            sm:flex sm:items-center sm:relative sm:left-auto sm:top-auto sm:right-auto sm:shadow-none sm:m-0 sm:p-0"
           >
             <TopBarLink
               href="/"
               isActive={router.pathname === "/"}
               title="Posts"
-              className="m-2 mb-4 block sm:m-0 sm:mr-8"
+              className="m-2 mb-6 block sm:m-0 sm:mr-8"
               onClick={() => setDropDownOpen(false)}
             />
             <TopBarLink
               href="/publications"
               isActive={router.pathname === "/publications"}
               title="Publications"
-              className="m-2 mb-4 block sm:m-0 sm:mr-8"
+              className="m-2 mb-6 block sm:m-0 sm:mr-8"
               onClick={() => setDropDownOpen(false)}
             />
             <TopBarLink
               href="/about"
               isActive={router.pathname === "/about"}
               title="About"
-              className="m-2 mb-4 block sm:m-0 sm:mr-8"
+              className="m-2 mb-6 block sm:m-0 sm:mr-8"
               onClick={() => setDropDownOpen(false)}
             />
             {userContext.isLoading ? (

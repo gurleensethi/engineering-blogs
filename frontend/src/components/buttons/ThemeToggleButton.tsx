@@ -15,7 +15,7 @@ const ThemeToggleButton: FC<Props> = ({ darkModeEnabled, ...rest }) => {
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
           fill="currentColor"
-          className="h-6 mr-4 sm:mr-8 text-gray-100 fade-in"
+          className="h-7 text-gray-100 fade-in"
           key="light"
         >
           <path
@@ -30,7 +30,7 @@ const ThemeToggleButton: FC<Props> = ({ darkModeEnabled, ...rest }) => {
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
-          className="h-6 mr-4 sm:mr-8 text-gray-500 fade-in"
+          className="h-7 text-gray-500 fade-in"
           key="dark"
         >
           <path
