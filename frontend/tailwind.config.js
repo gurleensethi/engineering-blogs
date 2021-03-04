@@ -14,6 +14,7 @@ module.exports = {
   variants: {
     extend: {
       ringWidth: ["hover", "dark"],
+      scale: ["group-hover"],
     },
   },
   plugins: [],

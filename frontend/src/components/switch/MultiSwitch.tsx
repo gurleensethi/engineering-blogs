@@ -1,6 +1,6 @@
 import { createContext, FC, useContext, useState } from "react";
 
-export interface Option {
+export interface MultiSwitchItemProps {
   id: string;
   name: string;
 }
@@ -38,7 +38,7 @@ const MultiSwitch: FC<MultiSwitchProps> = ({
   );
 };
 
-export const MultiSwitchItem: FC<Option> = ({ id, name }) => {
+export const MultiSwitchItem: FC<MultiSwitchItemProps> = ({ id, name }) => {
   const { selectedOption, setSelectedOption } = useContext(MultiSwitchContext);
   const isOptionSelected = selectedOption === id;
 

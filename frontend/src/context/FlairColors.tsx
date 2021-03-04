@@ -21,7 +21,7 @@ const flairColorsDark = [
   "text-white bg-violet-500",
 ];
 
-const getFlairColor = (id: string): string => {
+const getFlairColorLight = (id: string): string => {
   return flairColors[id.charCodeAt(0) % flairColors.length];
 };
 
@@ -29,18 +29,24 @@ const getFlairColorDark = (id: string): string => {
   return flairColorsDark[id.charCodeAt(0) % flairColors.length];
 };
 
-type FlairColorData = { getFlairColor: (id: string) => string };
+type FlairColorData = {
+  getFlairColor: (id: string) => string;
+  getFlairColorLight: (id: string) => string;
+  getFlairColorDark: (id: string) => string;
+};
 
-export const FlairColorsContext = createContext<FlairColorData>({
-  getFlairColor,
-});
+export const FlairColorsContext = createContext<FlairColorData>(null!);
 
 export const FlairColorsProvider: FC = ({ children }) => {
   const darkMode = useContext(DarkModeContext);
 
   const state = useMemo<FlairColorData>(
     () => ({
-      getFlairColor: darkMode.isEnabled ? getFlairColorDark : getFlairColor,
+      getFlairColor: darkMode.isEnabled
+        ? getFlairColorDark
+        : getFlairColorLight,
+      getFlairColorLight,
+      getFlairColorDark,
     }),
     [darkMode.isEnabled]
   );

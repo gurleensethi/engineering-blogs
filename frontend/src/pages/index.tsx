@@ -108,7 +108,7 @@ const Index: React.FC<Props> = ({
         onTextReset={onSearchReset}
       />
       <MultiSwitch
-        className="my-4"
+        className="my-4 text-lg"
         selectedId={postFeed}
         onOptionSelect={handleFeedSelect}
       >

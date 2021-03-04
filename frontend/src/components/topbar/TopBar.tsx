@@ -8,6 +8,7 @@ import Image from "next/image";
 import { DarkModeContext } from "../../context/DarkMode";
 import ThemeToggleButton from "../buttons/ThemeToggleButton";
 import useClickAway from "../../hooks/useClickAway";
+import Loading from "../Loading";
 
 export default function TopBar() {
   const router = useRouter();
@@ -104,9 +105,7 @@ export default function TopBar() {
               onClick={() => setDropDownOpen(false)}
             />
             {userContext.isLoading ? (
-              <div className="animate-spin w-4 h-4 bg-gray-500 flex justify-center items-center">
-                <div className="w-3 h-3 bg-white" />
-              </div>
+              <Loading />
             ) : userContext.data ? (
               <TopBarLink
                 href="/profile"
@@ -127,11 +126,11 @@ export default function TopBar() {
                       : "/images/github-logo.png"
                   }
                   alt="github logo"
-                  height={15}
-                  width={15}
+                  height={18}
+                  width={18}
                   className="opacity-80"
                 />
-                <div className="ml-2 text-sm text-gray-500 dark:text-gray-100">
+                <div className="ml-2 text-base text-gray-500 dark:text-gray-100">
                   Github Login
                 </div>
               </a>
