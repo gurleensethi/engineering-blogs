@@ -37,6 +37,7 @@ model User {
   email        String            @unique
   createdAt    DateTime          @default(now())
   publications UserPublication[]
+  role UserRole
 }
 
 model UserPublication {
@@ -46,4 +47,9 @@ model UserPublication {
   userId        Int
 
   @@id(fields: [userId, publicationId])
+}
+
+enum UserRole {
+  USER
+  ADMIN
 }

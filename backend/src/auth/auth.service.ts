@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
+import { UserRole } from '@prisma/client';
 import axios from 'axios';
 import { GitHubTokenResponse, GitHubUser, TokenPayload } from 'src/types';
 import { UserService } from 'src/user/user.service';
@@ -51,6 +52,7 @@ export class AuthService {
         username: githubUserData.login,
         firstName: nameSplits[0],
         lastName: nameSplits[1],
+        role: UserRole.USER,
       });
     }
 
