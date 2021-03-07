@@ -18,7 +18,7 @@ async function bootstrap() {
   const PORT = Number(PROVIDED_PORT) || 3000;
 
   if (consfigService.get<string>('ENV') === 'development') {
-    app.use(morgan('combined'));
+    app.use(morgan('dev'));
   }
 
   await app.listen(PORT);
