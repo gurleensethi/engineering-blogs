@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { FC, useContext } from "react";
+import React, { FC, useContext, useState } from "react";
+import { Accordian } from "../../components/accordian/Accordian";
 import { SubmitPublicationForm } from "../../components/compound/SubmitPublicationForm";
 import Layout from "../../components/Layout";
 import Loading from "../../components/Loading";
@@ -9,6 +10,7 @@ import { UserContext } from "../../context/UserProvider";
 const Profile: FC = () => {
   const router = useRouter();
   const user = useContext(UserContext);
+  const [isSubmitPubAccordianOpen, setSubmitPubAccordianOpen] = useState(false);
 
   if (user.isLoading) {
     return (
@@ -25,7 +27,7 @@ const Profile: FC = () => {
   }
 
   return (
-    <Layout className="fade-in" title="Profile">
+    <Layout className="fade-in sm:max-w-screen-md mx-auto" title="Profile">
       <h1 className="tracking-widest text-gray-500 dark:text-gray-300">
         @{user.data.username}
       </h1>
@@ -44,7 +46,14 @@ const Profile: FC = () => {
       <a className="btn" href="/logout">
         Logout
       </a>
-      <SubmitPublicationForm className="mt-16" />
+      <Accordian
+        isOpen={isSubmitPubAccordianOpen}
+        className="mt-16"
+        header="Submit a blog"
+        onToggle={() => setSubmitPubAccordianOpen((val) => !val)}
+      >
+        <SubmitPublicationForm />
+      </Accordian>
     </Layout>
   );
 };

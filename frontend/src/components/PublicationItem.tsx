@@ -33,12 +33,12 @@ const PublicationItem: FC<PublicationItemProps> = ({ publication }) => {
             <div className="flex flex-col flex-1 p-4 h-full">
               <div className="flex flex-col sm:flex-row items-center mb-2">
                 <h2
-                  className={`text-xl tracking-wider text-gray-600 font-semibold mr-auto dark:text-white`}
+                  className={`text-xl tracking-wider text-gray-600 font-semibold mr-auto dark:text-white mb-2 sm:mb-0`}
                 >
                   {publication.blogName}
                 </h2>
                 <h3
-                  className={`${flairColor} self-start font-semibold tracking-wide px-2 py-1 text-sm rounded inline-block`}
+                  className={`${flairColorDark} self-start font-semibold tracking-wide px-2 py-1 text-sm rounded inline-block`}
                 >
                   {publication.name}
                 </h3>
@@ -51,7 +51,7 @@ const PublicationItem: FC<PublicationItemProps> = ({ publication }) => {
                   onClick={(event) =>
                     handleOpenBlogLink(event, publication.link)
                   }
-                  className="outline-none focus:outline-none transition mr-auto text-sm transform text-blue-500 hover:text-blue-700 hover:scale-110 dark:text-gray-300 dark:hover:text-gray-500"
+                  className="outline-none focus:outline-none transition mr-auto text-sm transform text-blue-500 hover:text-blue-700 hover:scale-110 dark:hover:text-blue-300"
                 >
                   Blog Link
                 </button>

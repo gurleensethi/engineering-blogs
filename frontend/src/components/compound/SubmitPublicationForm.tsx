@@ -10,7 +10,7 @@ export const SubmitPublicationForm: FC<Props> = ({ className }) => {
   return (
     <form
       onSubmit={handleFormSubmit}
-      className={`${className} shadow-md rounded-md p-4 flex flex-col max-w-xl dark:ring-1 dark:ring-gray-700`}
+      className={`${className} flex flex-col p-4 dark:ring-1 dark:ring-gray-700`}
     >
       <div className="text-gray-700 font-bold text-lg dark:text-white">
         Want a blog to be included? Submit a Feed Url
