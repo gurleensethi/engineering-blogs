@@ -104,6 +104,9 @@ const About: FC = () => {
             <li className="mr-4 mb-4 bg-blue-500 text-white px-2 py-1 text-lg rounded-md shadow-md">
               Typescript
             </li>
+            <li className="mr-4 mb-4 bg-blue-500 text-white px-2 py-1 text-lg rounded-md shadow-md">
+              Docker
+            </li>
           </ul>
         )}
       />

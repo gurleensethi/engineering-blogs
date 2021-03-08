@@ -20,8 +20,8 @@ body {
 }
 
 .input {
-  @apply transition text-lg mb-6 ring-2 ring-gray-300 p-2 rounded-sm focus:ring-gray-500 outline-none;
-  @apply dark:ring-gray-500 dark:focus:ring-gray-300 dark:bg-gray-900 dark:text-white dark:placeholder-gray-500;
+  @apply transition text-lg mb-6 border-2 border-gray-300 p-2 rounded-md focus:border-gray-500 outline-none;
+  @apply dark:border-gray-500 dark:focus:border-gray-300 dark:bg-gray-900 dark:text-white dark:placeholder-gray-500;
 }
 
 .fade-in {

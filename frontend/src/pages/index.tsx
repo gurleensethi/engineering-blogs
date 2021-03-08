@@ -14,6 +14,7 @@ import PostItem from "../components/PostItem";
 import usePropChanged from "../hooks/usePropChanged";
 import SimpleDialog from "../components/dialog/SimpleDialog";
 import PublicationsEditor from "../components/compound/PublicationsEditor";
+import { SubmitPublicationForm } from "../components/compound/SubmitPublicationForm";
 
 type Props = {
   posts: Post[];
