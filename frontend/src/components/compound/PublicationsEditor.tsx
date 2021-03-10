@@ -69,7 +69,7 @@ const PublicationsEditor: FC<Props> = ({ onPublicationsModified }) => {
   if (userPub.isLoading || allPubs.isLoading) {
     return (
       <div className="flex justify-center items-center h-full w-full">
-        <Loading size={3} />
+        <Loading size="small" />
         <p className="ml-4 text-gray-700 text-xl dark:text-white">
           Bringing publications...
         </p>
@@ -116,7 +116,7 @@ const PublicationsEditor: FC<Props> = ({ onPublicationsModified }) => {
               <div className="flex-grow">{publication.name}</div>
               {isLoading && (
                 <Loading
-                  size={3}
+                  size="small"
                   className={`mr-2`}
                   progressColor={isSelected && "border-white"}
                 />

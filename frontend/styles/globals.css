@@ -2,68 +2,72 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  box-sizing: border-box;
-}
-
-html,
-body {
-  margin: 0px;
-  padding: 0px;
-}
-
-.btn {
-  @apply transition bg-gray-700 px-4 py-2 rounded-lg cursor-pointer text-white outline-none;
-  @apply hover:shadow-md hover:bg-gray-900;
-  @apply dark:bg-white dark:text-black dark:hover:bg-gray-500;
-  @apply focus:outline-none;
-}
-
-.input {
-  @apply transition text-lg mb-6 border-2 border-gray-300 p-2 rounded-md focus:border-gray-500 outline-none;
-  @apply dark:border-gray-500 dark:focus:border-gray-300 dark:bg-gray-900 dark:text-white dark:placeholder-gray-500;
-}
-
-.fade-in {
-  animation: fade-in 0.5s;
-}
-
-.enter-top {
-  animation: enter-top 0.3s;
-}
-
-.zoom-in {
-  animation: zoom-in 0.3s;
-}
-
-@keyframes fade-in {
-  from {
-    opacity: 0;
+@layer base {
+  * {
+    box-sizing: border-box;
   }
 
-  to {
-    opacity: 1;
+  html,
+  body {
+    margin: 0px;
+    padding: 0px;
   }
 }
 
-@keyframes enter-top {
-  from {
-    transform: translateY(-10px);
-    opacity: 0.5;
+@layer components {
+  .btn {
+    @apply transition bg-gray-700 px-4 py-2 rounded-lg cursor-pointer text-white outline-none;
+    @apply hover:shadow-md hover:bg-gray-900;
+    @apply dark:bg-white dark:text-black dark:hover:bg-gray-500;
+    @apply focus:outline-none;
   }
 
-  to {
-    transform: translateY(0px);
-    opacity: 1;
-  }
-}
-
-@keyframes zoom-in {
-  from {
-    transform: scale(0.8);
+  .input {
+    @apply transition text-lg mb-6 border-2 border-gray-300 p-2 rounded-md focus:border-gray-500 outline-none;
+    @apply dark:border-gray-500 dark:focus:border-gray-300 dark:bg-gray-900 dark:text-white dark:placeholder-gray-500;
   }
 
-  to {
-    transform: scale(1);
+  .fade-in {
+    animation: fade-in 0.5s;
+  }
+
+  .enter-top {
+    animation: enter-top 0.3s;
+  }
+
+  .zoom-in {
+    animation: zoom-in 0.3s;
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes enter-top {
+    from {
+      transform: translateY(-10px);
+      opacity: 0.5;
+    }
+
+    to {
+      transform: translateY(0px);
+      opacity: 1;
+    }
+  }
+
+  @keyframes zoom-in {
+    from {
+      transform: scale(0.8);
+    }
+
+    to {
+      transform: scale(1);
+    }
   }
 }
