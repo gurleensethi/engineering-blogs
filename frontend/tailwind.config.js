@@ -15,6 +15,7 @@ module.exports = {
     extend: {
       ringWidth: ["hover", "dark"],
       scale: ["group-hover"],
+      borderWidth: ["last"],
     },
   },
   plugins: [],

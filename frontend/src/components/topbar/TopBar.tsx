@@ -104,6 +104,15 @@ export default function TopBar() {
               className="m-2 mb-6 block sm:m-0 sm:mr-8"
               onClick={() => setDropDownOpen(false)}
             />
+            {userContext.data && userContext.data.role === "ADMIN" && (
+              <TopBarLink
+                href="/admin"
+                isActive={router.pathname === "/admin"}
+                title="Admin"
+                className="m-2 mb-6 block sm:m-0 sm:mr-8"
+                onClick={() => setDropDownOpen(false)}
+              />
+            )}
             {userContext.isLoading ? (
               <Loading />
             ) : userContext.data ? (

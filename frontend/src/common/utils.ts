@@ -1,3 +1,4 @@
+import { NextApiRequest } from "next";
 import colors from "tailwindcss/colors";
 
 export const shortenText = (text: string, length = 200): string => {

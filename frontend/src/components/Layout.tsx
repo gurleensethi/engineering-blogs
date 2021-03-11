@@ -5,7 +5,7 @@ type Props = React.HTMLAttributes<HTMLDivElement> & { title: string };
 
 const Layout: FC<Props> = ({ children, title, ...rest }) => {
   return (
-    <div {...rest} className={`${rest.className || ""} fade-in`}>
+    <div {...rest} className={`${rest.className || ""} fade-in relative`}>
       <Head>
         <title>{title}</title>
       </Head>
