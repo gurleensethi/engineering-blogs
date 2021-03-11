@@ -50,3 +50,9 @@ export enum FeedType {
   ALL = "all",
   MY_FEED = "my_feed",
 }
+
+export interface BlogSubmission {
+  id: number;
+  blogName: string;
+  blogUrl: string;
+}

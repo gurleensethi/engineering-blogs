@@ -38,8 +38,8 @@ export const Drawer: FC<DrawerProps> = ({
       >
         <div
           className={joinClassNames(
-            "shadow-lg rounded-md m-2 w-60 sm:w-80 right-0 bg-white dark:bg-gray-700 dark:text-white overflow-hidden",
-            isOpen ? "visible fade-in" : "invisible"
+            "shadow-lg rounded-md m-2 w-60 sm:w-80 right-0 bg-white dark:bg-gray-700 text-black dark:text-white overflow-hidden",
+            isOpen ? "visible fade-in enter-top" : "invisible"
           )}
         >
           {options.map((item) => {
@@ -48,7 +48,7 @@ export const Drawer: FC<DrawerProps> = ({
                 key={item.id}
                 className={joinClassNames(
                   "text-xl p-4 w-full border-b-2 last:border-b-0 outline-none focus:outline-none text-left",
-                  item.id === optionId ? "bg-gray-800" : ""
+                  item.id === optionId ? "bg-gray-200 dark:bg-gray-800" : ""
                 )}
                 onClick={() => handleOptionClick(item.id)}
               >
