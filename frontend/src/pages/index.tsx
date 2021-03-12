@@ -14,7 +14,6 @@ import PostItem from "../components/PostItem";
 import usePropChanged from "../hooks/usePropChanged";
 import SimpleDialog from "../components/dialog/SimpleDialog";
 import PublicationsEditor from "../components/compound/PublicationsEditor";
-import { SubmitPublicationForm } from "../components/compound/SubmitPublicationForm";
 
 type Props = {
   posts: Post[];
@@ -101,6 +100,7 @@ const Index: React.FC<Props> = ({
   return (
     <Layout
       title="Posts | Engineering Blogs"
+      description="Blogs from the best software engineering blogs around the world."
       className="flex flex-col items-center sm:max-w-screen-lg m-auto h-full w-full"
     >
       <Search
