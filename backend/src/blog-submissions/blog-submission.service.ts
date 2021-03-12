@@ -18,9 +18,9 @@ export class BlogSubmissionService {
       where: { userId: user.id },
     });
 
-    if (submission.length > 5) {
+    if (submission.length >= 5) {
       throw new BadRequestException(
-        '5 submission already made. Please for them to approve before submitting more.',
+        '5 submission already made. Please wait for them to be approved before submitting more.',
       );
     }
 

@@ -8,4 +8,4 @@ import { BlogSubmissionService } from './blog-submission.service';
   providers: [BlogSubmissionService],
   exports: [BlogSubmissionService],
 })
-export class BlogSubmissionsModule {}
+export class BlogSubmissionModule {}

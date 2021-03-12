@@ -7,6 +7,7 @@ import { SyncModule } from './sync/sync.module';
 import { PublicationModule } from './publication/publication.module';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
+import { BlogSubmissionModule } from './blog-submissions/blog-submission.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { UserModule } from './user/user.module';
     PublicationModule,
     AuthModule,
     UserModule,
+    BlogSubmissionModule,
   ],
   controllers: [],
   providers: [],

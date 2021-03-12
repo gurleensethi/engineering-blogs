@@ -40,6 +40,6 @@ export class BlogSubmissionController {
     @AuthUser() user: User,
     @Param('id', ParseIntPipe) id: number,
   ) {
-    return this.blogSubmissionService.deleteSubmission();
+    return this.blogSubmissionService.deleteSubmission(id);
   }
 }
