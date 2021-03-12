@@ -15,22 +15,10 @@ export const ConfirmationDialog: FC<Props> = ({
   onCancel,
   onDone,
 }) => {
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.position = "fixed";
-    } else {
-      document.body.style.position = "";
-    }
-  }, [isOpen]);
-
-  if (!isOpen) {
-    return null;
-  }
-
   return (
     <BaseDialog isOpen={isOpen} onClose={onClose}>
       <div className="dark:text-white">
-        <div className="text-xl mt-4 mb-8">{children}</div>
+        <div className="text-xl mb-8">{children}</div>
         <div className="flex justify-end">
           <button className="btn mr-4" onClick={onCancel}>
             Cancel

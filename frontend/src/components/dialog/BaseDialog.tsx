@@ -5,9 +5,9 @@ type Props = { isOpen: boolean; onClose: () => void };
 export const BaseDialog: FC<Props> = ({ isOpen, children, onClose }) => {
   useEffect(() => {
     if (isOpen) {
-      document.body.style.position = "fixed";
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.position = "";
+      document.body.style.overflow = "unset";
     }
   }, [isOpen]);
 
@@ -25,28 +25,13 @@ export const BaseDialog: FC<Props> = ({ isOpen, children, onClose }) => {
       }}
     >
       <div
-        className="zoom-in overflow-scroll fade-in flex flex-col bg-white dark:bg-gray-900 max-h-full p-4 sm:p-8 m-8 sm:m-16 md:m-24 lg:m-32 rounded-lg shadow-xl"
+        className="zoom-in overflow-scroll fade-in flex flex-col bg-white dark:bg-gray-900 max-h-full p-4 sm:px-8 sm:py-8 m-8 sm:m-16 md:m-24 lg:m-32 rounded-lg shadow-xl"
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
         }}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          className="h-6 ml-auto mb-2 text-gray-400 hover:text-gray-800 dark:hover:text-gray-100 transition cursor-pointer"
-          onClick={() => onClose()}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M6 18L18 6M6 6l12 12"
-          />
-        </svg>
-        {children}
+        <div className="mt-2">{children}</div>
       </div>
     </div>
   );
