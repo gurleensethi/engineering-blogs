@@ -6,9 +6,10 @@ function extractCommonFieldsFromRSS({
   guid,
   pubDate,
   link,
+  id,
 }: any): Omit<Post, 'postId' | 'publicationId' | 'imageUrl'> {
   return {
-    guid,
+    guid: guid || id,
     title,
     description,
     pubDate: new Date(pubDate),
@@ -289,19 +290,19 @@ export default <{ [key: string]: BlogSource }>{
       };
     },
   },
-  gojek: {
-    name: 'Gojek',
-    blogName: 'Gojek Product + Tech - Medium',
-    link: 'https://blog.gojekengineering.com',
-    description: "Gojek's Product and Engineering Blog - Medium",
-    feedUrl: 'https://blog.gojekengineering.com/feed',
-    isPaged: false,
-    mapper: (rawJson: any) => {
-      return {
-        ...extractCommonFieldsFromRSS(rawJson),
-      };
-    },
-  },
+  // gojek: {
+  //   name: 'Gojek',
+  //   blogName: 'Gojek Product + Tech - Medium',
+  //   link: 'https://blog.gojekengineering.com',
+  //   description: "Gojek's Product and Engineering Blog - Medium",
+  //   feedUrl: 'https://blog.gojekengineering.com/feed',
+  //   isPaged: false,
+  //   mapper: (rawJson: any) => {
+  //     return {
+  //       ...extractCommonFieldsFromRSS(rawJson),
+  //     };
+  //   },
+  // },
   stripe: {
     name: 'Stripe',
     blogName: 'Stripe Blog',
@@ -309,6 +310,112 @@ export default <{ [key: string]: BlogSource }>{
     description: 'The Stripe Blog',
     feedUrl: 'https://stripe.com/blog/feed.rss',
     isPaged: false,
+    mapper: (rawJson: any) => {
+      return {
+        ...extractCommonFieldsFromRSS(rawJson),
+      };
+    },
+  },
+  awsNewsBlog: {
+    name: 'AWS',
+    blogName: 'AWS News Blog',
+    link: 'https://aws.amazon.com/blogs/aws/',
+    description: 'Announcements, Updates, and Launches',
+    feedUrl: 'https://aws.amazon.com/blogs/aws/feed',
+    isPaged: false,
+    mapper: (rawJson: any) => {
+      return {
+        ...extractCommonFieldsFromRSS(rawJson),
+      };
+    },
+  },
+  auth0: {
+    name: 'Auth0',
+    blogName: 'Auth0 Blog',
+    link: 'https://auth0.com/blog',
+    description: 'Company Updates, Technology Articles from Auth0',
+    feedUrl: 'https://auth0.com/blog/rss.xml',
+    isPaged: false,
+    mapper: (rawJson: any) => {
+      return {
+        ...extractCommonFieldsFromRSS(rawJson),
+      };
+    },
+  },
+  facebook: {
+    name: 'Facebook',
+    blogName: 'Facebook Engineering',
+    link: 'https://engineering.fb.com',
+    description: 'Facebook Engineering Blog',
+    feedUrl: 'https://engineering.fb.com/feed',
+    isPaged: true,
+    startPage: 1,
+    getNextPage: (page) => page + 1,
+    getNextPageLink: (page) => `https://engineering.fb.com/feed?paged=${page}`,
+    mapper: (rawJson: any) => {
+      return {
+        ...extractCommonFieldsFromRSS(rawJson),
+      };
+    },
+  },
+  herokuEngineering: {
+    name: 'Heroku',
+    blogName: 'Heroku Engineering',
+    link: 'https://blog.heroku.com/engineering',
+    description: 'The Heroku Blog',
+    feedUrl: 'https://blog.heroku.com/engineering/feed',
+    isPaged: true,
+    startPage: 1,
+    getNextPage: (page) => page + 1,
+    getNextPageLink: (page) =>
+      `https://blog.heroku.com/engineering/feed?page=${page}`,
+    mapper: (rawJson: any) => {
+      return {
+        ...extractCommonFieldsFromRSS(rawJson),
+      };
+    },
+  },
+  intercom: {
+    name: 'Intercom',
+    blogName: 'Engineering Inside Intercom',
+    link: 'https://www.intercom.com/blog/engineering',
+    description: 'Product, Marketing, and Customer Support Blog',
+    feedUrl: 'https://www.intercom.com/blog/engineering/feed',
+    isPaged: false,
+    mapper: (rawJson: any) => {
+      return {
+        ...extractCommonFieldsFromRSS(rawJson),
+      };
+    },
+  },
+  stackoverflow: {
+    name: 'StackOverflow',
+    blogName: 'Stack Overflow Blog',
+    link: 'https://stackoverflow.blog',
+    description:
+      'Essays, opinions, and advice on the act of computer programming from Stack Overflow.',
+    feedUrl: 'https://stackoverflow.blog/feed/',
+    isPaged: true,
+    startPage: 1,
+    getNextPage: (page) => page + 1,
+    getNextPageLink: (page) => `https://stackoverflow.blog/feed?paged=${page}`,
+    mapper: (rawJson: any) => {
+      return {
+        ...extractCommonFieldsFromRSS(rawJson),
+      };
+    },
+  },
+  zillow: {
+    name: 'Zillow',
+    blogName: 'Zillow Tech Hub',
+    link: 'https://www.zillow.com/tech',
+    description: 'Zillow Tech Hub',
+    feedUrl: 'https://www.zillow.com/tech/feed',
+    isPaged: true,
+    startPage: 1,
+    getNextPage: (page) => page + 1,
+    getNextPageLink: (page) =>
+      `https://www.zillow.com/tech/feed/?paged=${page}`,
     mapper: (rawJson: any) => {
       return {
         ...extractCommonFieldsFromRSS(rawJson),

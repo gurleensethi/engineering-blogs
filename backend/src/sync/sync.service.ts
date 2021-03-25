@@ -95,11 +95,15 @@ export class SyncService {
           });
         }
 
-        const posts: Prisma.PostUpdateInput[] = items.map((item) => ({
-          ...blog.mapper(item),
-          postId: `${blogKey}#${item.guid}`,
-          publicationId: pub.id,
-        }));
+        const posts: Prisma.PostUpdateInput[] = items.map((item) => {
+          const mappedData = blog.mapper(item);
+
+          return {
+            ...mappedData,
+            postId: `${blogKey}#${mappedData.guid}`,
+            publicationId: pub.id,
+          };
+        });
 
         this.logger.log(`${posts.length} posts fetched for '${blogKey}'.`);
 
