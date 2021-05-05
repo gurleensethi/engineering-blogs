@@ -212,22 +212,31 @@ export const getServerSideProps: GetServerSideProps<Props, Query> = async ({
     };
   }
 
-  const { data: posts, pageNumber, hasNextPage } =
-    feed === FeedType.MY_FEED
-      ? await getMyFeedPost({
-          page,
-          authToken: req.cookies["auth.access_token"],
-        })
-      : await getAllPosts({ page, publicationIds, search });
+  try {
+    const { data: posts, pageNumber, hasNextPage } =
+      feed === FeedType.MY_FEED
+        ? await getMyFeedPost({
+            page,
+            authToken: req.cookies["auth.access_token"],
+          })
+        : await getAllPosts({ page, publicationIds, search });
 
-  return {
-    props: {
-      posts,
-      hasNextPage,
-      pageNumber,
-      publicationIds: publicationIds || "",
-      search: search || "",
-      feed,
-    },
-  };
+    return {
+      props: {
+        posts,
+        hasNextPage,
+        pageNumber,
+        publicationIds: publicationIds || "",
+        search: search || "",
+        feed,
+      },
+    };
+  } catch (err) {
+    return {
+      redirect: {
+        destination: "/error",
+        statusCode: 307,
+      },
+    };
+  }
 };
