@@ -422,17 +422,4 @@ export default <{ [key: string]: BlogSource }>{
       };
     },
   },
-  logrocket: {
-    name: 'LogRocket',
-    blogName: 'LogRocket Blog',
-    link: 'https://blog.logrocket.com',
-    description: 'For Frontend Developers and Web App Engineers',
-    feedUrl: 'https://blog.logrocket.com/feed/',
-    isPaged: false,
-    mapper: (rawJson: any) => {
-      return {
-        ...extractCommonFieldsFromRSS(rawJson),
-      };
-    },
-  },
 };
