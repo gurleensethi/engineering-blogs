@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:prod": "NODE_ENV=production next build",
     "start": "next start",
     "heroku:start": "next start -p $PORT",
     "heroku:docker:build": "docker build -t registry.heroku.com/engineeringblogs/web .",
