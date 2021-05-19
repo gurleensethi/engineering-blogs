@@ -31,7 +31,8 @@ const PostItem: React.FC<Props> = ({ post, onPublicationClick, ...rest }) => {
               !!post.imageUrl ? "object-cover" : "object-contain p-12"
             }`}
             onError={function (event) {
-              const imgElement: HTMLImageElement = event.target as HTMLImageElement;
+              const imgElement: HTMLImageElement =
+                event.target as HTMLImageElement;
               imgElement.src = "/images/logo.png";
               imgElement.classList.remove("object-cover");
               imgElement.classList.add("object-contain");
@@ -57,8 +58,8 @@ const PostItem: React.FC<Props> = ({ post, onPublicationClick, ...rest }) => {
             <div className="mb-2 text-lg text-gray-700 dark:text-gray-100 font-medium">
               {post.title}
             </div>
-            <div className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-              {shortenText(post.description)}
+            <div className="mb-2 text-sm text-gray-500 dark:text-gray-400 break-all">
+              {shortenText(post.description, 200)}
             </div>
           </div>
         </div>
